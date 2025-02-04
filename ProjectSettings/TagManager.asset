@@ -3,15 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Pin
+  - Lava
+  - Water
+  - Rock
+  - Ring
+  - DeathZone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Frame
+  - 
   - Water
   - UI
-  - Pin
+  - 
   - 
   - 
   - 

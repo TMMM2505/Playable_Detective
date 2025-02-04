@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: dfaac79959aa98c48aba15562310ffa9
+  productGUID: a1c17f56d03c7f14b951814cb9530e84
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Playable_Detective
+  productName: Base_Playable
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -836,14 +836,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Playable_Detective
+  metroPackageName: Base_Playable
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Playable_Detective
+  metroApplicationDescription: Base_Playable
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -912,10 +912,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 02d6c9b4-1bfa-433f-b37a-8c79ed595720
+  cloudProjectId: bc8cbe17-c32c-40fc-98cf-46a7a456ad29
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Playable_Detective
+  projectName: Base_Playable
   organizationId: includereturn1
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
