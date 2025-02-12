@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: -777816280, guid: 82b3e86ad84a71a49a92687b41318caf, type: 3}
   m_Name: SVC_Luna
   m_EditorClassIdentifier: 
-  _svcLunaVersion: 3
+  _svcLunaVersion: 2
   _shaderVariants: []
   _usedByLunaBuild: []
   _includedShaderVariants: []
   _excludedShaderVariants: []
-  version: 3
+  version: 5
   _shaderParsedShaders: []
   _modifiedShaders: []
   invalidShaders: 0
+  _cachedShadersPlatform: 0
   _sceneLightData:
     PointLightCount: 0
     SpotLightCount: 0
