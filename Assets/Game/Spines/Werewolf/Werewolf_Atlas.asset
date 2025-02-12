@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
+  m_Name: Werewolf_Atlas
+  m_EditorClassIdentifier: 
+  textureLoadingMode: 0
+  onDemandTextureLoader: {fileID: 0}
+  atlasFile: {fileID: 4900000, guid: 905b39328344e0b43b761cae5e440fc4, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 91119ea0226488c44b3079dc9bb186bb, type: 2}
+  - {fileID: 2100000, guid: 84e57afbc69330f4eaee84a3b7df0ec6, type: 2}
+  - {fileID: 2100000, guid: 906fc4f1c58ee01478d45fe0621e5e09, type: 2}
+  - {fileID: 2100000, guid: 532377ce2042d72459874ffb00f6f873, type: 2}
