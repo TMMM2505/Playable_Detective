@@ -15,6 +15,7 @@ public class InputManagerLevelCircleMaze : MonoBehaviour
     private List<Vector2> _touchPoints;
     private Vector2 _lastTouchPoint;
     private bool _isRotating;
+    private CircleMazeRotateDirection lastDirection;
 
     public static event Action<CircleMazeRotateDirection, float, float> rotateCircleMazeEvent;
     public static event Action stopRotateCircleMazeEvent;
@@ -70,11 +71,13 @@ public class InputManagerLevelCircleMaze : MonoBehaviour
                     {
                         if (_touchPoints[1].x > _touchPoints[0].x)
                         {
-                            rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Right, _touchPoints[1].y, 1);
+                            rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Right, _touchPoints[1].y, distance);
+                            lastDirection = CircleMazeRotateDirection.Right;
                         }
                         else
                         {
-                            rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Left, _touchPoints[1].y, 1);
+                            rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Left, _touchPoints[1].y, distance);
+                            lastDirection = CircleMazeRotateDirection.Left;
                         }
 
                         _isRotating = true;
@@ -86,30 +89,22 @@ public class InputManagerLevelCircleMaze : MonoBehaviour
                         difference = mousePosition.x - _lastTouchPoint.x;
                         distance = Mathf.Abs(difference);
 
-                        // if (difference > 0)
-                        // {
-                        //     rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Right, _touchPoints[1].y, distance);
-                        // }
-                        // else
-                        // {
-                        //     rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Left, _touchPoints[1].y, distance);
-                        // }
-
-                        if (distance > newInputThreshold)
-                        {
-                            if (difference > 0)
-                            {
-                                rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Right, _touchPoints[1].y, 1);
-                            }
-                            else
-                            {
-                                rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Left, _touchPoints[1].y, 1);
-                            }
-                        }
-                        else
-                        {
-                            stopRotateCircleMazeEvent.Invoke();
-                        }
+                        //if (difference > 0)
+                        //{
+                        //    rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Right, _touchPoints[1].y, distance);
+                        //    lastDirection = CircleMazeRotateDirection.Right;
+                        //}
+                        //else if( difference < 0)
+                        //{
+                        //    rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Left, _touchPoints[1].y, distance);
+                        //    lastDirection = CircleMazeRotateDirection.Left;
+                        //}
+                        //else
+                        //{
+                        //    Debug.Log("Hello");
+                        //    rotateCircleMazeEvent.Invoke(lastDirection, _touchPoints[1].y, 1);
+                        //}
+                        rotateCircleMazeEvent.Invoke(lastDirection, _touchPoints[1].y, distance);
 
                         _lastTouchPoint = mousePosition;
                     }
@@ -159,11 +154,10 @@ public class InputManagerLevelCircleMaze : MonoBehaviour
 
         return results.Count > 0;
     }
+    public void TriggerCTA()
+    {
+        Debug.Log("triggerCTA");
+        Luna.Unity.Playable.InstallFullGame("https://play.google.com/store/apps/details?id=com.gamee.detective.mansion.pullpin.puzzle");
+        Luna.Unity.LifeCycle.GameEnded();
+    }
 }
-
-//public void TriggerCTA()
-//{
-//    Debug.Log("triggerCTA");
-//    Luna.Unity.Playable.InstallFullGame("https://play.google.com/store/apps/details?id=com.gamee.detective.mansion.pullpin.puzzle");
-//    Luna.Unity.LifeCycle.GameEnded();
-//}

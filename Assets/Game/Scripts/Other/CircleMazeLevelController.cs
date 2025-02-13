@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -48,7 +47,7 @@ public class CircleMazeLevelController : MonoBehaviour
         // _rotatingCoroutine = StartCoroutine(Rotating(circleMazeRotateDirection));
 
         // isTopHalf
-        int direction = mousePositionY > circleMazeParts[0].transform.position.y ? 1 : -1;
+        int direction = mousePositionY <= circleMazeParts[0].transform.position.y ? 1 : -1;
 
         foreach (var item in circleMazeParts)
         {
@@ -56,15 +55,19 @@ public class CircleMazeLevelController : MonoBehaviour
             {
                 // Tween.Custom(0, -direction * distanceBetweenTouches * torqueStrength, duration: 0.5f, onValueChange: newVal => item.angularVelocity = newVal, ease: Ease.Linear);
                 // item.angularVelocity = new Vector3(0, 0, -direction * distanceBetweenTouches * torqueStrength);
-                item.angularVelocity = -direction * distanceBetweenTouches * torqueStrength;
+                //item.angularVelocity = -direction * distanceBetweenTouches * torqueStrength;
                 // item.AddTorque(-direction * torqueStrength);
+
+                transform.Rotate(0, 0, (torqueStrength + distanceBetweenTouches) * direction);
             }
             else
             {
                 // Tween.Custom(0, direction * distanceBetweenTouches * torqueStrength, duration: 0.5f, onValueChange: newVal => item.angularVelocity = newVal, ease: Ease.Linear);
                 // item.angularVelocity = new Vector3(0, 0, direction * distanceBetweenTouches * torqueStrength);
-                item.angularVelocity = direction * distanceBetweenTouches * torqueStrength;
+                //item.angularVelocity = direction * distanceBetweenTouches * torqueStrength;
                 // item.AddTorque(direction * torqueStrength);
+
+                transform.Rotate(0, 0, -(torqueStrength + distanceBetweenTouches) * direction);
             }
 
             item.angularDrag = 0;
@@ -84,71 +87,4 @@ public class CircleMazeLevelController : MonoBehaviour
             // item.angularVelocity = 0;
         }
     }
-
-    // private IEnumerator Rotating(CircleMazeRotateDirection circleMazeRotateDirection)
-    // {
-    //     WaitForSeconds waitForSometimes = new WaitForSeconds(delayBetweenInputRotation);
-
-    //     // reset angular velocity
-
-    //     foreach (var item in circleMazeParts)
-    //     {
-    //         item.angularVelocity = new Vector3(0, 0, torqueStrength);
-    //     }
-
-    //     yield return waitForSometimes;
-
-    //     while (true)
-    //     {
-    //         // float torqueZ;
-
-    //         // if (circleMazeRotateDirection == CircleMazeRotateDirection.Right)
-    //         // {
-    //         //     torqueZ = torqueStrength;
-    //         // }
-    //         // else
-    //         // {
-    //         //     torqueZ = -torqueStrength;
-    //         // }
-
-    //         // foreach (var item in circleMazeParts)
-    //         // {
-    //         //     item.AddTorque(new Vector3(0, 0, torqueZ), forceMode);
-    //         // }
-
-    //         // _tweens.Add(Tween.Delay(delayBetweenInputRotation).OnComplete(() => _isRotating = false));
-
-    //         // _isRotating = true;
-
-    //         yield return waitForSometimes;
-    //     }
-    // }
-
-    // private void Rotate(CircleMazeRotateDirection circleMazeRotateDirection)
-    // {
-    //     if (_isRotating)
-    //     {
-    //         return;
-    //     }
-
-    //     float torqueZ;
-
-    //     if (circleMazeRotateDirection == CircleMazeRotateDirection.Right)
-    //     {
-    //         torqueZ = torqueStrength;
-    //     }
-    //     else
-    //     {
-    //         torqueZ = -torqueStrength;
-    //     }
-
-    //     foreach (var item in circleMazeParts)
-    //     {
-    //         item.AddTorque(new Vector3(0, 0, torqueZ), forceMode);
-    //     }
-
-    //     _tweens.Add(Tween.Delay(delayBetweenInputRotation).OnComplete(() => _isRotating = false));
-
-    //     _isRotating = true;
-    // }
 }
