@@ -6,12 +6,6 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private UICLose uicLose;
     [SerializeField] private UICWin uicWin;
     [SerializeField] private Animator animTakePhoto;
-    public void TriggerCTA()
-    {
-        // Debug.Log("triggerCTA");
-        // Luna.Unity.Playable.InstallFullGame("https://play.google.com/store/apps/details?id=com.gamee.detective.mansion.pullpin.puzzle");
-        // Luna.Unity.LifeCycle.GameEnded();
-    }
     public void ShowGamePlay()
     {
         uicLose.gameObject.SetActive(false);
@@ -28,7 +22,7 @@ public class UIManager : Singleton<UIManager>
         uicWin.gameObject.SetActive(true);
         uicWin.OnShowed();
         
-        SoundManager.Ins.PlaySound(Constant.soundGirlSay, false);
+        //SoundManager.Ins.PlaySound(Constant.soundGirlSay, false);
     }
 
     public IEnumerator TakePhoto()

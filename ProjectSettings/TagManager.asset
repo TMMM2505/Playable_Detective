@@ -10,11 +10,13 @@ TagManager:
   - Rock
   - Ring
   - DeathZone
+  - Trap_Lava
+  - Tag_Stone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ball
   - Water
   - UI
   - 

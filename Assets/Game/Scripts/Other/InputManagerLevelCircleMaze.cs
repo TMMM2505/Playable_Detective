@@ -15,6 +15,7 @@ public class InputManagerLevelCircleMaze : MonoBehaviour
     private List<Vector2> _touchPoints;
     private Vector2 _lastTouchPoint;
     private bool _isRotating;
+    private bool isCircularMotion;
     private CircleMazeRotateDirection lastDirection;
 
     public static event Action<CircleMazeRotateDirection, float, float> rotateCircleMazeEvent;
@@ -39,6 +40,8 @@ public class InputManagerLevelCircleMaze : MonoBehaviour
     private IEnumerator DetectInput()
     {
         WaitForSeconds waitForSometimes = new WaitForSeconds(0.02f);
+        int circularMotionHoldTime = 0;
+        bool circularMotionExit = false;
 
         while (true)
         {
@@ -64,8 +67,9 @@ public class InputManagerLevelCircleMaze : MonoBehaviour
                 }
                 else
                 {
-                    float difference = mousePosition.x - _touchPoints[1].x;
-                    float distance = Mathf.Abs(difference);
+                    float differenceX = mousePosition.x - _touchPoints[1].x;
+                    float differenceY = mousePosition.y - _touchPoints[1].y;
+                    float distance = Mathf.Abs(differenceX);
 
                     if (_isRotating == false)
                     {
@@ -86,25 +90,61 @@ public class InputManagerLevelCircleMaze : MonoBehaviour
                     }
                     else
                     {
-                        difference = mousePosition.x - _lastTouchPoint.x;
-                        distance = Mathf.Abs(difference);
+                        differenceX = mousePosition.x - _lastTouchPoint.x;
+                        differenceY = Mathf.Abs(mousePosition.y - _lastTouchPoint.y);
+                        distance = Mathf.Abs(differenceX);
 
-                        //if (difference > 0)
-                        //{
-                        //    rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Right, _touchPoints[1].y, distance);
-                        //    lastDirection = CircleMazeRotateDirection.Right;
-                        //}
-                        //else if( difference < 0)
-                        //{
-                        //    rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Left, _touchPoints[1].y, distance);
-                        //    lastDirection = CircleMazeRotateDirection.Left;
-                        //}
-                        //else
-                        //{
-                        //    Debug.Log("Hello");
-                        //    rotateCircleMazeEvent.Invoke(lastDirection, _touchPoints[1].y, 1);
-                        //}
-                        rotateCircleMazeEvent.Invoke(lastDirection, _touchPoints[1].y, distance);
+                        if(differenceY <= .15f) //change rotation midway if not circling
+                        {
+                            if (differenceX > 0 && !isCircularMotion)
+                            {
+                                if (circularMotionExit)
+                                {
+                                    _touchPoints[1] = mousePosition;
+                                }
+
+                                //Debug.Log("Right");
+                                rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Right, _touchPoints[1].y, distance);
+                                lastDirection = CircleMazeRotateDirection.Right;
+                            }
+                            else if (differenceX < 0 && !isCircularMotion)
+                            {
+                                if (circularMotionExit)
+                                {
+                                    _touchPoints[1] = mousePosition;
+                                }
+
+                                //Debug.Log("Left");
+                                rotateCircleMazeEvent.Invoke(CircleMazeRotateDirection.Left, _touchPoints[1].y, distance);
+                                lastDirection = CircleMazeRotateDirection.Left;
+                            }
+                            else
+                            {
+                                rotateCircleMazeEvent.Invoke(lastDirection, _touchPoints[1].y, distance);
+
+                                if (differenceX == 0)
+                                {
+                                    circularMotionHoldTime++;
+                                }
+                                else circularMotionHoldTime = 0;
+
+                                Debug.Log("Hold time: " + circularMotionHoldTime);
+                                if (circularMotionHoldTime >= 4)
+                                {
+                                    circularMotionExit = true;
+                                    isCircularMotion = false;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("Cirular motion enter");
+                            circularMotionExit = false;
+                            isCircularMotion = true;
+                            rotateCircleMazeEvent.Invoke(lastDirection, _touchPoints[1].y, distance);
+                        }
+                        
+                        //rotateCircleMazeEvent.Invoke(lastDirection, _touchPoints[1].y, distance);
 
                         _lastTouchPoint = mousePosition;
                     }
@@ -114,10 +154,10 @@ public class InputManagerLevelCircleMaze : MonoBehaviour
             {
                 if (_isRotating)
                 {
+                    circularMotionHoldTime = 0;
                     StopRotate();
                 }
             }
-
             yield return waitForSometimes;
         }
     }
@@ -134,6 +174,7 @@ public class InputManagerLevelCircleMaze : MonoBehaviour
         _touchPoints.Clear();
 
         _isRotating = false;
+        isCircularMotion = false;
     }
 
     private void DisableInput()
