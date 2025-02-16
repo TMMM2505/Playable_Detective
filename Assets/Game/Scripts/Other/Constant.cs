@@ -18,10 +18,10 @@ public class Constant
     public const string soundNeedHelp = "NeedHelp";
     public const string soundMainScared = "MainScared";
     public const string soundRat = "Rat";
-    
-    public const string animTakePhoto = "TakePhoto";
-    public const string animScare = "BonusAnim/Scared2";
-    public const string animLose = "Lose";
+
+    public const string animWolfAttack = "Attack";
+    public const string animWolfRoar = "Roar";
+    public const string animIdle = "Idle";
     
     public const string animMouseIdle = "Idle";
     
