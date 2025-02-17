@@ -10,9 +10,14 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         onLose += OnLose;
+        onWin += OnWin;
     }
 
     private void OnLose()
+    {
+        gameOver = true;
+    }
+    private void OnWin()
     {
         gameOver = true;
     }

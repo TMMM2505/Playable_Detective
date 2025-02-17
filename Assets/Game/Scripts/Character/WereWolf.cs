@@ -1,10 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WereWolf : CharacterSpine
 {
     [SerializeField] private AudioClip roarSfx;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,5 +39,15 @@ public class WereWolf : CharacterSpine
     private void DefaultAnimOnComplete(Spine.TrackEntry trackEntry)
     {
         SetAnim(Constant.animIdle, true);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == Constant.ballLayer && !GameManager.Ins.gameOver)
+        {
+            StopAllCoroutines();
+
+            SetAnim(Constant.animWolfDieBomb, false);
+            GameManager.Ins.onWin?.Invoke();
+        }
     }
 }
