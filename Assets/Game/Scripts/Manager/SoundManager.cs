@@ -1,4 +1,5 @@
-using DG.Tweening.Core.Easing;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,10 +17,10 @@ public class SoundManager : Singleton<SoundManager>
     {
         PlaySoundFXClip(bgTheme, transform, 1, true);
 
-        //GameManager.Instance.onLose += OnLoseAudio;
-        //GameManager.Instance.onWin += OnWinAudio;
+        GameManager.Ins.onLose += OnLoseAudio;
+        GameManager.Ins.onWin += OnWinAudio;
     }
-    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, bool loop)
+    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, bool loop, Action onComplete = null)
     {
         //check if clip is already exist or not
         if (ongoingSources?.Find(x => x.name == audioClip.name) != null)
@@ -47,10 +48,17 @@ public class SoundManager : Singleton<SoundManager>
 
             //get length of sfx clip
             float clipLength = audioSource.clip.length;
+            StartCoroutine(DelayedAction(onComplete, clipLength));
 
             //add clip to the ongoing sources
             ongoingSources.Add(audioSource);
         }
+    }
+    private IEnumerator DelayedAction(Action action, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        action?.Invoke();
     }
 
     private void PlayExistingAudioSourceByName(string name)

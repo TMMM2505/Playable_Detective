@@ -7,6 +7,8 @@ public class Constant
     public const string tagWater = "Water";
     public const string tagRock = "Rock";   
     public const string tagDeathZone = "DeathZone";
+
+    public const int enemyLayer = 6;
     
     public const string soundBg = "Background";
     public const string soundClick = "Click";
@@ -22,6 +24,8 @@ public class Constant
     public const string animWolfAttack = "Attack";
     public const string animWolfRoar = "Roar";
     public const string animIdle = "Idle";
+
+    public const string mainFall2 = "Fall2";
     
     public const string animMouseIdle = "Idle";
     

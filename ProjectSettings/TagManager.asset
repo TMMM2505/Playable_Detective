@@ -12,6 +12,7 @@ TagManager:
   - DeathZone
   - Trap_Lava
   - Tag_Stone
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Ball
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 

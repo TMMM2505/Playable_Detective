@@ -8,12 +8,14 @@ public class WereWolf : CharacterSpine
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.Ins.onLose += WolfAttack;
+
         StartCoroutine(RandomRoarIntervalLoop());   
     }
 
     private IEnumerator RandomRoarIntervalLoop()
     {
-        while (true)
+        while (!GameManager.Ins.gameOver)
         {
             float waitTime = Random.Range(7f, 15f);
 
@@ -29,9 +31,13 @@ public class WereWolf : CharacterSpine
 
         SoundManager.Ins.PlaySoundFXClip(roarSfx, transform, 1, false);
     }
+    private void WolfAttack()
+    {
+        SetAnim(Constant.animWolfAttack, false);
+    }
 
     private void DefaultAnimOnComplete(Spine.TrackEntry trackEntry)
     {
-        SetAnim(Constant.animIdle, false);
+        SetAnim(Constant.animIdle, true);
     }
 }
