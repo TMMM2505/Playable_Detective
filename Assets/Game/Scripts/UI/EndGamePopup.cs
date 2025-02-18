@@ -2,6 +2,7 @@ using DG.Tweening;
 using Spine;
 using Spine.Unity;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -13,20 +14,19 @@ public class EndGamePopup : MonoBehaviour
     [SerializeField] SkeletonAnimation loseText;
 
     internal Action showText;
-
-    private Vector3 originalScale;
     // Start is called before the first frame update
     void Start()
     {
         victoryText.gameObject.SetActive(false);    
-        loseText.gameObject.SetActive(false);
-        originalScale = popupTransform.localScale;   
+        loseText.gameObject.SetActive(false); 
         popupTransform.DOScale(Vector3.zero, 0);
     }
 
-    internal void Activate()
+    internal IEnumerator Activate(float waitTime)
     {
-        popupTransform.DOScale(originalScale, 1f).SetEase(Ease.OutElastic).onComplete += OnActivateComplete;
+        yield return new WaitForSeconds(waitTime);
+
+        popupTransform.DOScale(Vector3.one, .5f).SetEase(Ease.OutElastic).onComplete += OnActivateComplete;
     }
 
     private void OnActivateComplete()
@@ -53,9 +53,11 @@ public class EndGamePopup : MonoBehaviour
 
     private void IdleText(TrackEntry trackEntry)
     {
+        victoryText.AnimationState.Complete -= IdleText;
         victoryText.loop = true;
         victoryText.AnimationName = Constant.textIdleAnim;
 
+        loseText.AnimationState.Complete -= IdleText;
         loseText.loop = true;
         loseText.AnimationName = Constant.textIdleAnim;
     }

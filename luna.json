@@ -1,14 +1,14 @@
 {
-    "version": "6.2.0",
+    "version": "6.1.1",
     "projectId": "a1c17f56d03c7f14b951814cb9530e84",
     "applicationID": 24841,
     "creativeName": "DetectivePin_Playable_Lv52_1401",
     "pgServer": "EU",
     "window": {
-        "‐‵": true
+        "‐ ": true
     },
     "unity": {
-        "environmentID": 1145263534,
+        "environmentID": 1145263696,
         "scripts": {
             "excludes": [
                 "**/Editor/",
@@ -80,8 +80,8 @@
             "externalSources": [],
             "externalJSLibraries": [],
             "scriptingDefines": [],
-            "msbuildVersion": "17.11",
-            "monoVersion": "8.0.10",
+            "msbuildVersion": "17.6",
+            "monoVersion": "7.0.7",
             "dotnetVersion": ""
         },
         "assets": {
@@ -163,9 +163,9 @@
         "minify": true,
         "forceUncompressed": false,
         "forceBase64": false,
-        "graphicsConstraint": 28,
         "genericCheck": true,
         "disableAntiAliasing": true,
+        "preferWebGl2": false,
         "forceStableRandomSeed": false,
         "unusedModules": [
             {

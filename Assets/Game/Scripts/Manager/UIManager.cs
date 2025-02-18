@@ -20,7 +20,7 @@ public class UIManager : Singleton<UIManager>
         FadeBG.SetActive(true);
 
         endGamePopUp.showText += endGamePopUp.ShowLoseText;
-        endGamePopUp.Activate();
+        StartCoroutine(endGamePopUp.Activate(2f));
     }
 
     public void ShowWin()
@@ -29,6 +29,6 @@ public class UIManager : Singleton<UIManager>
         FadeBG.SetActive(true);
 
         endGamePopUp.showText += endGamePopUp.ShowVictoryText;
-        endGamePopUp.Activate();
+        StartCoroutine(endGamePopUp.Activate(2f));
     }
 }

@@ -38,6 +38,7 @@ public class WereWolf : CharacterSpine
 
     private void DefaultAnimOnComplete(Spine.TrackEntry trackEntry)
     {
+        anim.AnimationState.Complete -= DefaultAnimOnComplete;
         SetAnim(Constant.animIdle, true);
     }
     private void OnTriggerEnter2D(Collider2D collision)
