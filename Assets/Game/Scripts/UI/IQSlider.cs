@@ -11,6 +11,7 @@ public class IQSlider : MonoBehaviour
     [SerializeField] float sliderTimer;
     [SerializeField] TMP_Text numberText;
     [SerializeField] Image brain;
+    [SerializeField] AudioClip emergencySfx;
     [SerializeField] Color emergencyColor;
 
     private float currentValue;
@@ -20,6 +21,7 @@ public class IQSlider : MonoBehaviour
     {
         onEmergency += EmergencyTriger;
         GameManager.Ins.onWin += StopSlider;
+        GameManager.Ins.onLose += StopSlider;
     }
     void Start()
     {
@@ -58,10 +60,13 @@ public class IQSlider : MonoBehaviour
     }
     private void EmergencyTriger()
     {
+        SoundManager.Ins.PlaySoundFXClip(emergencySfx, transform, .5f, true);
         brain.DOColor(emergencyColor, .5f).SetLoops(-1, LoopType.Yoyo);
+        numberText.DOColor(emergencyColor, .5f).SetLoops(-1, LoopType.Yoyo);
     }
     private void StopSlider()
     {
+        SoundManager.Ins.StopSourceByName(emergencySfx.name);
         StopAllCoroutines();
     }
 }

@@ -1,0 +1,13 @@
+Lose_Text.png
+size:340,340
+filter:Linear,Linear
+pma:true
+e
+bounds:187,176,161,150
+rotate:90
+l
+bounds:2,165,183,172
+o
+bounds:2,17,168,146
+s
+bounds:172,17,156,146

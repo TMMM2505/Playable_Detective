@@ -1,33 +1,34 @@
-using System.Collections;
 using UnityEngine;
-using DG.Tweening;
+using TMPro;
 public class UIManager : Singleton<UIManager>
 {
-    [SerializeField] private UICLose uicLose;
-    [SerializeField] private UICWin uicWin;
-    [SerializeField] private Animator animTakePhoto;
-    public void ShowGamePlay()
+    [SerializeField] private TMP_Text tutorialText;
+    [SerializeField] private GameObject FadeBG;
+    [SerializeField] private EndGamePopup endGamePopUp;
+    private void Awake()
     {
-        uicLose.gameObject.SetActive(false);
-        uicWin.gameObject.SetActive(false);
+        GameManager.Ins.onLose += ShowLose;
+        GameManager.Ins.onWin += ShowWin;
+    }
+    private void Start()
+    {
+        FadeBG.SetActive(false);
     }
     public void ShowLose()
     {
-        uicLose.gameObject.SetActive(true);
-        uicLose.OnShowed();
+        tutorialText.gameObject.SetActive(false);
+        FadeBG.SetActive(true);
+
+        endGamePopUp.showText += endGamePopUp.ShowLoseText;
+        endGamePopUp.Activate();
     }
 
     public void ShowWin()
     {
-        uicWin.gameObject.SetActive(true);
-        uicWin.OnShowed();
-        
-        //SoundManager.Ins.PlaySound(Constant.soundGirlSay, false);
-    }
+        tutorialText.gameObject.SetActive(false);
+        FadeBG.SetActive(true);
 
-    public IEnumerator TakePhoto()
-    {
-        yield return new WaitForSeconds(1f);
-        animTakePhoto.gameObject.SetActive(true);
+        endGamePopUp.showText += endGamePopUp.ShowVictoryText;
+        endGamePopUp.Activate();
     }
 }

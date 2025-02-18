@@ -7,6 +7,12 @@ public class Main : CharacterSpine
     [SerializeField] AudioClip helpMe;
     [SerializeField] AudioClip getHitSfx;
     [SerializeField] AudioClip wereWolfAttackHit;
+    [SerializeField] AudioClip mainWin;
+
+    private void Awake()
+    {
+        GameManager.Ins.onWin += MainWin;
+    }
     private void Start()
     {
         SoundManager.Ins.PlaySoundFXClip(mainScared, transform, 1, false, 
@@ -27,9 +33,17 @@ public class Main : CharacterSpine
     }
     private void MainDie()
     {
-        SoundManager.Ins.PlaySoundFXClip(getHitSfx, transform, 1, false);
+        StopAllCoroutines();
 
+        SoundManager.Ins.PlaySoundFXClip(getHitSfx, transform, 1, false);
         SetAnim(Constant.mainFall2, false);
+    }
+    private void MainWin()
+    {
+        StopAllCoroutines();    
+
+        SoundManager.Ins.PlaySoundFXClip(mainWin, transform, 1, false);
+        SetAnim(Constant.mainWin3, true);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

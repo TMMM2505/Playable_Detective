@@ -70,7 +70,7 @@ public class SoundManager : Singleton<SoundManager>
     public void StopSourceByName(string name)
     {
         AudioSource source = ongoingSources.Find(x => x.name == name);
-        source.Stop();
+        source?.Stop();
     }
     private void OnWinAudio()
     {
