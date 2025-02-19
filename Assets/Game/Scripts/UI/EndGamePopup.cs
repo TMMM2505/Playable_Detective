@@ -19,14 +19,22 @@ public class EndGamePopup : MonoBehaviour
     {
         victoryText.gameObject.SetActive(false);    
         loseText.gameObject.SetActive(false); 
-        popupTransform.DOScale(Vector3.zero, 0);
+
+        popupTransform.DOScale(Vector3.zero, 0); 
     }
 
     internal IEnumerator Activate(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
 
-        popupTransform.DOScale(Vector3.one, .5f).SetEase(Ease.OutElastic).onComplete += OnActivateComplete;
+        if (DeviceOrientationDetection.isLandscape)
+        {
+            popupTransform.DOScale(Vector3.one * 0.25f, .5f).SetEase(Ease.OutElastic).onComplete += OnActivateComplete;
+        }
+        else
+        {
+            popupTransform.DOScale(Vector3.one, .5f).SetEase(Ease.OutElastic).onComplete += OnActivateComplete;
+        }
     }
 
     private void OnActivateComplete()

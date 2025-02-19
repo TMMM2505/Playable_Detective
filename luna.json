@@ -1,14 +1,14 @@
 {
-    "version": "6.1.1",
+    "version": "6.2.1",
     "projectId": "a1c17f56d03c7f14b951814cb9530e84",
     "applicationID": 24841,
     "creativeName": "DetectivePin_Playable_Lv52_1401",
     "pgServer": "EU",
     "window": {
-        "‐ ": true
+        "‐‵": true
     },
     "unity": {
-        "environmentID": 1145263696,
+        "environmentID": 1145263535,
         "scripts": {
             "excludes": [
                 "**/Editor/",
@@ -80,8 +80,8 @@
             "externalSources": [],
             "externalJSLibraries": [],
             "scriptingDefines": [],
-            "msbuildVersion": "17.6",
-            "monoVersion": "7.0.7",
+            "msbuildVersion": "17.11",
+            "monoVersion": "8.0.10",
             "dotnetVersion": ""
         },
         "assets": {
@@ -132,9 +132,7 @@
         "scenes": [
             "Assets/Scenes/PlayableScene.unity"
         ],
-        "disabledScenes": [
-            "Assets/Scenes/EndCardScene.unity"
-        ],
+        "disabledScenes": [],
         "startupScene": 0,
         "packages": {
             "default": {
@@ -163,9 +161,9 @@
         "minify": true,
         "forceUncompressed": false,
         "forceBase64": false,
+        "graphicsConstraint": 28,
         "genericCheck": true,
         "disableAntiAliasing": true,
-        "preferWebGl2": false,
         "forceStableRandomSeed": false,
         "unusedModules": [
             {
@@ -192,6 +190,11 @@
                 "name": "mecanim-wasm",
                 "excluded": false,
                 "forceIncluded": true
+            },
+            {
+                "name": "physics3d",
+                "excluded": false,
+                "forceIncluded": false
             }
         ],
         "disableRuntimeAnalysisForCode": true,
@@ -9735,6 +9738,26 @@
                         "script": "",
                         "ext": "",
                         "name": "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset"
+                    },
+                    {
+                        "maxWidth": 512,
+                        "maxHeight": 512,
+                        "format": "png32",
+                        "compression": "none",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/TextMesh Pro/Fonts/LuckiestGuy-Regular SDF.asset"
+                    },
+                    {
+                        "maxWidth": 512,
+                        "maxHeight": 512,
+                        "format": "png32",
+                        "compression": "none",
+                        "quality": 65,
+                        "script": "",
+                        "ext": "",
+                        "name": "Assets/TextMesh Pro/Fonts/BoldenVan SDF.asset"
                     }
                 ]
             },

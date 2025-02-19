@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class ElementsOrientationScale : MonoBehaviour
     [SerializeField] GameObject level;
     [SerializeField] TMP_Text tutorialText;
     [SerializeField] RectTransform iqSlider;
+    [SerializeField] RectTransform endgamePopup;
+    [SerializeField] RectTransform gameIcon;
 
     private void Awake()
     {
@@ -14,6 +17,9 @@ public class ElementsOrientationScale : MonoBehaviour
 
         DeviceOrientationDetection.onPortraitMode += SliderCanvasPortraitTransform;
         DeviceOrientationDetection.onLandscapeMode += SliderCanvasLandscapeTransform;
+
+        DeviceOrientationDetection.onPortraitMode += EndgamePopupPortraitTransform;
+        DeviceOrientationDetection.onLandscapeMode += EndgamePopupLandscapeTransform;
     }   
     private void LevelMapPortraitTransform()
     {
@@ -37,10 +43,29 @@ public class ElementsOrientationScale : MonoBehaviour
     private void SliderCanvasLandscapeTransform()
     {
         tutorialText.rectTransform.localPosition = new Vector3(-300f, -18.5f, 0);
-        tutorialText.fontSize = 48.5f;
+        tutorialText.fontSize = 44f;
         tutorialText.enableWordWrapping = true;
 
         iqSlider.localPosition = new Vector3(-300, 160, 0);
         iqSlider.localScale = Vector3.one * 0.6f;
+    }
+    private void EndgamePopupPortraitTransform()
+    {
+        if (GameManager.Ins.gameOver)
+        {
+            endgamePopup.localPosition = Vector3.up * 69;
+            endgamePopup.localScale = Vector3.one;
+
+        }
+        gameIcon.gameObject.SetActive(false);
+    }
+    private void EndgamePopupLandscapeTransform()
+    {
+        if(GameManager.Ins.gameOver)
+        {
+            endgamePopup.localPosition = Vector3.up * 10;
+            endgamePopup.localScale = Vector3.one * 0.25f;
+        }
+        gameIcon.gameObject.SetActive(true);
     }
 }

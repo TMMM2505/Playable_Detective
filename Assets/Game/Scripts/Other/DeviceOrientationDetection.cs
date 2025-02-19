@@ -6,7 +6,7 @@ public class DeviceOrientationDetection : MonoBehaviour
     internal static event Action onPortraitMode;
     internal static event Action onLandscapeMode;
 
-    private bool isLandscape; // Track the last known orientation
+    internal static bool isLandscape; // Track the last known orientation
 
     void Start()
     {
