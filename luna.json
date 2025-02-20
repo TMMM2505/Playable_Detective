@@ -1,7 +1,7 @@
 {
     "version": "6.2.1",
     "projectId": "a1c17f56d03c7f14b951814cb9530e84",
-    "applicationID": 25626,
+    "applicationID": 24841,
     "creativeName": "DetectivePin_Playable_Lv52_1401",
     "pgServer": "EU",
     "window": {
@@ -80,8 +80,8 @@
             "externalSources": [],
             "externalJSLibraries": [],
             "scriptingDefines": [],
-            "msbuildVersion": "17.12",
-            "monoVersion": "9.0.0",
+            "msbuildVersion": "17.11",
+            "monoVersion": "8.0.10",
             "dotnetVersion": ""
         },
         "assets": {
