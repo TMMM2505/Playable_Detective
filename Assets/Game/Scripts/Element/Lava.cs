@@ -5,9 +5,9 @@ public class Lava : MonoBehaviour
     [SerializeField] AudioClip lavaSfx;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == Constant.enemyLayer && !GameManager.Ins.gameOver)
+        if (collision.gameObject.layer == Constant.enemyLayer && !GameManager.Instance.gameOver)
         {
-            SoundManager.Ins.PlaySoundFXClip(lavaSfx, transform, 1, false);
+            //SoundManager.Instance.PlaySoundFXClip(lavaSfx, transform, 1, false);
         }
     }
 }

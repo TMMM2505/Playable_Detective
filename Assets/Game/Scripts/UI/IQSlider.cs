@@ -1,72 +1,72 @@
-using DG.Tweening;
-using System;
-using System.Collections;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+//using DG.Tweening;
+//using System;
+//using System.Collections;
+//using TMPro;
+//using UnityEngine;
+//using UnityEngine.UI;
 
-public class IQSlider : MonoBehaviour
-{
-    [SerializeField] Slider slider;
-    [SerializeField] float sliderTimer;
-    [SerializeField] TMP_Text numberText;
-    [SerializeField] Image brain;
-    [SerializeField] AudioClip emergencySfx;
-    [SerializeField] Color emergencyColor;
+//public class IQSlider : MonoBehaviour
+//{
+//    [SerializeField] Slider slider;
+//    [SerializeField] float sliderTimer;
+//    [SerializeField] TMP_Text numberText;
+//    [SerializeField] Image brain;
+//    [SerializeField] AudioClip emergencySfx;
+//    [SerializeField] Color emergencyColor;
 
-    private float currentValue;
-    private Action onEmergency;
+//    private float currentValue;
+//    private Action onEmergency;
 
-    private void Awake()
-    {
-        onEmergency += EmergencyTriger;
-        GameManager.Ins.onWin += StopSlider;
-        GameManager.Ins.onLose += StopSlider;
-    }
-    void Start()
-    {
-        currentValue = slider.maxValue;
+//    private void Awake()
+//    {
+//        onEmergency += EmergencyTriger;
+//        GameManager.Instance.onWin += StopSlider;
+//        GameManager.Instance.onLose += StopSlider;
+//    }
+//    void Start()
+//    {
+//        currentValue = slider.maxValue;
 
-        StartCoroutine(BarMoveDown());
-    }
+//        StartCoroutine(BarMoveDown());
+//    }
 
-    private IEnumerator BarMoveDown()
-    {
-        float timeElapsed = 0;
+//    private IEnumerator BarMoveDown()
+//    {
+//        float timeElapsed = 0;
 
-        while(timeElapsed < sliderTimer)
-        {
-            if(timeElapsed >= 20f)
-            {
-                //trigger slider flash
-                onEmergency?.Invoke();
-                onEmergency = null;
-            }
+//        while(timeElapsed < sliderTimer)
+//        {
+//            if(timeElapsed >= 20f)
+//            {
+//                //trigger slider flash
+//                onEmergency?.Invoke();
+//                onEmergency = null;
+//            }
 
-            float t = timeElapsed / sliderTimer;
+//            float t = timeElapsed / sliderTimer;
 
-            currentValue = Mathf.Lerp(100f, 0f, t);
-            slider.value = currentValue;    
-            numberText.text = Mathf.Ceil(currentValue).ToString();
+//            currentValue = Mathf.Lerp(100f, 0f, t);
+//            slider.value = currentValue;    
+//            numberText.text = Mathf.Ceil(currentValue).ToString();
 
-            timeElapsed += Time.deltaTime;
+//            timeElapsed += Time.deltaTime;
 
-            yield return null;
-        }
-        slider.value = 0;
-        numberText.text = "0";
+//            yield return null;
+//        }
+//        slider.value = 0;
+//        numberText.text = "0";
 
-        GameManager.Ins.onLose?.Invoke(); 
-    }
-    private void EmergencyTriger()
-    {
-        SoundManager.Ins.PlaySoundFXClip(emergencySfx, transform, .5f, true);
-        brain.DOColor(emergencyColor, .5f).SetLoops(-1, LoopType.Yoyo);
-        numberText.DOColor(emergencyColor, .5f).SetLoops(-1, LoopType.Yoyo);
-    }
-    private void StopSlider()
-    {
-        SoundManager.Ins.StopSourceByName(emergencySfx.name);
-        StopAllCoroutines();
-    }
-}
+//        GameManager.Instance.onLose?.Invoke(); 
+//    }
+//    private void EmergencyTriger()
+//    {
+//        SoundManager.Instance.PlaySoundFXClip(emergencySfx, transform, .5f, true);
+//        brain.DOColor(emergencyColor, .5f).SetLoops(-1, LoopType.Yoyo);
+//        numberText.DOColor(emergencyColor, .5f).SetLoops(-1, LoopType.Yoyo);
+//    }
+//    private void StopSlider()
+//    {
+//        SoundManager.Instance.StopSourceByName(emergencySfx.name);
+//        StopAllCoroutines();
+//    }
+//}

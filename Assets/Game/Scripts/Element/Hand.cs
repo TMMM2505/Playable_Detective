@@ -10,7 +10,7 @@ public class Hand : MonoBehaviour
 
     private void Awake()
     {
-        InputManagerLevelCircleMaze.isFirstClick += DeactivateHand;
+        //InputManagerLevelCircleMaze.isFirstClick += DeactivateHand;
     }
     private void Start()
     {

@@ -51,21 +51,21 @@ public class ElementsOrientationScale : MonoBehaviour
     }
     private void EndgamePopupPortraitTransform()
     {
-        if (GameManager.Ins.gameOver)
-        {
-            endgamePopup.localPosition = Vector3.up * 69;
-            endgamePopup.localScale = Vector3.one;
+        //if (GameManager.Ins.gameOver)
+        //{
+        //    endgamePopup.localPosition = Vector3.up * 69;
+        //    endgamePopup.localScale = Vector3.one;
 
-        }
+        //}
         gameIcon.gameObject.SetActive(false);
     }
     private void EndgamePopupLandscapeTransform()
     {
-        if(GameManager.Ins.gameOver)
-        {
-            endgamePopup.localPosition = Vector3.up * 10;
-            endgamePopup.localScale = Vector3.one * 0.25f;
-        }
+        //if(GameManager.Ins.gameOver)
+        //{
+        //    endgamePopup.localPosition = Vector3.up * 10;
+        //    endgamePopup.localScale = Vector3.one * 0.25f;
+        //}
         gameIcon.gameObject.SetActive(true);
     }
 }

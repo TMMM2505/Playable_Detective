@@ -9,14 +9,16 @@ using UnityEngine;
 public class EndGamePopup : MonoBehaviour
 {
     [SerializeField] RectTransform popupTransform;
-    [SerializeField] TMP_Text buttonText;
     [SerializeField] SkeletonAnimation victoryText;
     [SerializeField] SkeletonAnimation loseText;
+    [SerializeField] GameObject ctaButton;
+    [SerializeField] internal TMP_Text buttonText;
 
     internal Action showText;
     // Start is called before the first frame update
     void Start()
     {
+        ctaButton.SetActive(false); 
         victoryText.gameObject.SetActive(false);    
         loseText.gameObject.SetActive(false); 
 
@@ -26,6 +28,8 @@ public class EndGamePopup : MonoBehaviour
     internal IEnumerator Activate(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+
+        ctaButton.SetActive(true);
 
         if (DeviceOrientationDetection.isLandscape)
         {
@@ -47,16 +51,12 @@ public class EndGamePopup : MonoBehaviour
         victoryText.gameObject.SetActive(true);
         victoryText.AnimationName = Constant.textShowAnim;
         victoryText.AnimationState.Complete += IdleText;
-
-        buttonText.text = "Next";
     }
     internal void ShowLoseText()
     {
         loseText.gameObject.SetActive(true);
         loseText.AnimationName = Constant.textShowAnim;
         loseText.AnimationState.Complete += IdleText;
-
-        buttonText.text = "Again";
     }
 
     private void IdleText(TrackEntry trackEntry)

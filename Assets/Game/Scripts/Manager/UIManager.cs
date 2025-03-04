@@ -7,8 +7,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private EndGamePopup endGamePopUp;
     private void Awake()
     {
-        GameManager.Ins.onLose += ShowLose;
-        GameManager.Ins.onWin += ShowWin;
+        GameManager.Instance.onLose += ShowLose;
+        GameManager.Instance.onWin += ShowWin;
     }
     private void Start()
     {
@@ -18,6 +18,7 @@ public class UIManager : Singleton<UIManager>
     {
         tutorialText.gameObject.SetActive(false);
         FadeBG.SetActive(true);
+        endGamePopUp.buttonText.text = "Again";
 
         endGamePopUp.showText += endGamePopUp.ShowLoseText;
         StartCoroutine(endGamePopUp.Activate(2f));
@@ -27,6 +28,7 @@ public class UIManager : Singleton<UIManager>
     {
         tutorialText.gameObject.SetActive(false);
         FadeBG.SetActive(true);
+        endGamePopUp.buttonText.text = "Next";
 
         endGamePopUp.showText += endGamePopUp.ShowVictoryText;
         StartCoroutine(endGamePopUp.Activate(2f));
