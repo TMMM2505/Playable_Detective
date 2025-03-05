@@ -1,39 +1,54 @@
+using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 public class Bodyguard : CharacterSpine
 {
-    [SerializeField] private AudioClip roarSfx;
+    [SerializeField] private AudioClip gruntSfx;
+    [SerializeField] CheckVisionComponent checkVision;
+
+    public override bool CanMove => throw new NotImplementedException();
+    public override Vector3 Position => throw new NotImplementedException();
+    public override bool IsCompleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public override Action ActionCompleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.onLose += WolfAttack;
+        GameManager.Instance.onLose += EnemyAttack;
 
         StartCoroutine(RandomRoarIntervalLoop());   
+    }
+    private void Update()
+    {
+        checkVision.CheckVisionLeft();
+        checkVision.CheckVisionRight();
     }
 
     private IEnumerator RandomRoarIntervalLoop()
     {
-        while (!GameManager.Instance.gameOver)
+        yield return new WaitForSeconds(.75f);
+
+        SoundManager.Instance.PlaySoundFXClip(gruntSfx, 1, false); //initial sound
+
+        while (true)
         {
-            float waitTime = Random.Range(7f, 15f);
+            yield return new WaitForSeconds(6.75f);
 
-            yield return new WaitForSeconds(waitTime);
-
-            WolfRoar();
+            SoundManager.Instance.PlaySoundFXClip(gruntSfx, 1, false);
         }
     }
-    private void WolfRoar()
+    private void BodyguardGroan()
     {
-        SetAnim(Constant.animWolfRoar, false);
-        anim.AnimationState.Complete += DefaultAnimOnComplete;
+        //SetAnim(Constant.animWolfRoar, false);
+        //anim.AnimationState.Complete += DefaultAnimOnComplete;
 
         //SoundManager.Instance.PlaySoundFXClip(roarSfx, transform, 1, false);
     }
-    private void WolfAttack()
+    private void EnemyAttack()
     {
-        SetAnim(Constant.animWolfAttack, false);
+        SetAnim(Constant.animEnemyAttack, false);
     }
 
     private void DefaultAnimOnComplete(Spine.TrackEntry trackEntry)
@@ -43,12 +58,12 @@ public class Bodyguard : CharacterSpine
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == Constant.ballLayer && !GameManager.Instance.gameOver)
+        switch (collision.gameObject.layer)
         {
-            StopAllCoroutines();
-
-            SetAnim(Constant.animWolfDieBomb, false);
-            GameManager.Instance.onWin?.Invoke();
+            case Constant.powerUpLayer:
+                collision.transform.parent.gameObject.SetActive(false);
+                SetAnim(Constant.bodyguardV2Idle, true);
+                break;
         }
     }
 }

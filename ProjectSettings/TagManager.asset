@@ -13,6 +13,7 @@ TagManager:
   - Trap_Lava
   - Tag_Stone
   - Enemy
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
-  - 
+  - Player
+  - Power Up
   - 
   - 
   - 
