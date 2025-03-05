@@ -1,0 +1,16 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:b166fba6d26444740217cc79591a52d2:261634cd574fea6dd7ad2793a915f993:85897a1333f4da2365539fd9e9931a21$
+#
+:format=40300
+:texture=drop_water.png
+:size=476x476
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+Element_WaterTexture;0;2;474;474; 0.5;0.5; 0;0;0;0; 14;362;465;432;427;474;379;474;56;441;19;415;0;86;0;21;74;0;159;0;301;36;377;90;441;186;474;305;474; 12;8;12;13;10;11;12;9;10;12;8;9;12;5;8;13;6;7;8;5;6;8;3;4;5;3;5;13;2;3;13;1;2;13;0;1;13
