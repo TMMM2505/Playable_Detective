@@ -10,11 +10,6 @@ public class Main : CharacterSpine
     [SerializeField] AudioClip wereWolfAttackHit;
     [SerializeField] AudioClip mainWin;
 
-    public override bool CanMove => throw new NotImplementedException();
-    public override Vector3 Position => throw new NotImplementedException();
-    public override bool IsCompleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public override Action ActionCompleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
     private void Awake()
     {
         //GameManager.Ins.onWin += MainWin;
@@ -50,7 +45,7 @@ public class Main : CharacterSpine
     }
     private void SupermainTransform()
     {
-        anim.initialSkinName = Constant.supermainSkin;
+        ChangeSkin(Constant.supermainSkin);
         SetAnim(Constant.supermainIdle, true);
     }
     private void OnTriggerEnter2D(Collider2D collision)

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 using System;
-public class Pin : MonoBehaviour
+public class Pin : MonoBehaviour, IObjectChecker
 {
     [SerializeField] private Transform head;
     [SerializeField] private Transform end;
@@ -12,7 +12,13 @@ public class Pin : MonoBehaviour
 
     [SerializeField] private AudioClip dragPin;
 
-    public Transform Center => center;
+    public GameObject CheckedGameObject => gameObject;
+
+    public Vector3 Position => transform.position;
+
+    public bool IsCompleted { get; set; }
+
+    public Vector3 CenterPosition => throw new NotImplementedException();
 
     internal Action onClick;
 

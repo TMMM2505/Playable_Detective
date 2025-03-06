@@ -1,15 +1,19 @@
 using UnityEngine;
 using Spine.Unity;
 using System;
+using Spine;
 
 public abstract class CharacterSpine : MonoBehaviour, IObjectChecker
 {
     [SerializeField] protected SkeletonAnimation anim;
 
-    public abstract bool CanMove { get; }
-    public abstract Vector3 Position { get; }
-    public abstract bool IsCompleted { get; set; }
-    public abstract Action ActionCompleted { get; set; }
+    public GameObject CheckedGameObject => gameObject;
+
+    public Vector3 Position => transform.position;
+
+    public bool IsCompleted { get; set; }
+
+    public Vector3 CenterPosition => throw new NotImplementedException();
 
     private void Start()
     {
@@ -19,5 +23,15 @@ public abstract class CharacterSpine : MonoBehaviour, IObjectChecker
     {
         anim.loop = loop;
         anim.AnimationName = animName;
+    }
+    public void ChangeSkin(string skinName)
+    {
+        var skin = new Skin("temp");
+        skin.AddSkin(anim.skeleton.Data.FindSkin(skinName));
+        anim.initialSkinName = "temp";
+        anim.skeleton.SetSkin(skin);
+        anim.skeleton.SetSlotsToSetupPose();
+        anim.LateUpdate();
+        anim.AnimationState.Apply(anim.skeleton);
     }
 }

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public interface IObjectChecker
 {
-    bool CanMove { get; }
+    GameObject CheckedGameObject { get; }
     Vector3 Position { get; }
     bool IsCompleted { set; get; }
-    System.Action ActionCompleted { set; get; }
+    Vector3 CenterPosition { get; }
 }

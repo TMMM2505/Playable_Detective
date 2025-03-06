@@ -8,11 +8,6 @@ public class Bodyguard : CharacterSpine
     [SerializeField] private AudioClip gruntSfx;
     [SerializeField] CheckVisionComponent checkVision;
 
-    public override bool CanMove => throw new NotImplementedException();
-    public override Vector3 Position => throw new NotImplementedException();
-    public override bool IsCompleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public override Action ActionCompleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +19,10 @@ public class Bodyguard : CharacterSpine
     {
         checkVision.CheckVisionLeft();
         checkVision.CheckVisionRight();
+    }
+    private void CheckPlayer()
+    {
+
     }
 
     private IEnumerator RandomRoarIntervalLoop()
