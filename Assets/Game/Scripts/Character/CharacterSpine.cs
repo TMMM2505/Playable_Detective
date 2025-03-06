@@ -19,11 +19,15 @@ public abstract class CharacterSpine : MonoBehaviour, IObjectChecker
     {
         SetAnim(Constant.animIdle, true);
     }
-    public void SetAnim(string animName, bool loop)
+    public void SetAnim(string animName, bool loop, Spine.AnimationState.TrackEntryDelegate onComplete = null)
     {
+        if (anim.AnimationName == animName) return;
+
         anim.loop = loop;
         anim.AnimationName = animName;
+        anim.AnimationState.Complete += onComplete;
     }
+
     public void ChangeSkin(string skinName)
     {
         var skin = new Skin("temp");

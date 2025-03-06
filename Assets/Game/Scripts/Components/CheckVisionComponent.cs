@@ -46,7 +46,7 @@ public class CheckVisionComponent : MonoBehaviour
             {
                 if (target.CheckedGameObject != this.gameObject && !target.IsCompleted)
                 {
-                    Debug.Log("object hit: " + target.CheckedGameObject.name);
+                    //Debug.Log("object hit: " + target.CheckedGameObject.name);
                     return target;
                 }
                 else

@@ -7,7 +7,7 @@ public class Main : CharacterSpine
     [SerializeField] AudioClip mainScared;
     [SerializeField] AudioClip helpMe;
     [SerializeField] AudioClip getHitSfx;
-    [SerializeField] AudioClip wereWolfAttackHit;
+    [SerializeField] AudioClip enemyAttackHit;
     [SerializeField] AudioClip mainWin;
 
     private void Awake()
@@ -56,6 +56,7 @@ public class Main : CharacterSpine
                 //SoundManager.Ins.PlaySoundFXClip(wereWolfAttackHit, transform, 1, false);
 
                 MainDie();
+                GameManager.Instance.onLose?.Invoke();
                 break;
             case Constant.powerUpLayer:
                 collision.transform.parent.gameObject.SetActive(false);

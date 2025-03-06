@@ -10,7 +10,10 @@ public class Constant
 
     public const string animEnemyAttack = "Attack";
 
+    public const string bodyguardWalk = "Walk";
     public const string bodyguardV2Idle = "Bodyguard_ver2/Idle";
+    public const string bodyguardV2Attack = "Bodyguard_ver2/Attack";
+    public const string bodyguardV2Run = "Bodyguard_ver2/Run";
 
     public const string mainFall2 = "Fall2";
     public const string mainWin3 = "Win3";
