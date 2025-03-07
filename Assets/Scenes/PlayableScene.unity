@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &43406064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 43406065}
+  m_Layer: 6
+  m_Name: Acid Fire Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &43406065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43406064}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.092, y: 1.85, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 294671677}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &54307603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,6 +1181,7 @@ Transform:
   m_Children:
   - {fileID: 717030592}
   - {fileID: 1604063318}
+  - {fileID: 43406065}
   m_Father: {fileID: 977441267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &294671678
@@ -1238,9 +1270,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 717030593}
   gruntSfx: {fileID: 8300000, guid: 2caf6cf8c30331d4c8a6767014c62e8a, type: 3}
+  gruntV2Sfx: {fileID: 8300000, guid: b176200c394dd6b45b8f68fb6f21e945, type: 3}
+  v2AttackSfx: {fileID: 8300000, guid: 71b9934062d67c141a3f3c5ebd05b8a6, type: 3}
   checkVision: {fileID: 1604063319}
   speedMove: 0.5
-  attackRange: 1
+  poweredUpBullet: {fileID: 7734693050173939272, guid: dd7cac5aec85dd64c8707802be8143dd, type: 3}
+  acidFirePos: {fileID: 43406065}
 --- !u!61 &294671681
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1311,7 +1346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311165599}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.17851572, w: 0.9839371}
+  m_LocalRotation: {x: 0, y: 0, z: 0.17851546, w: 0.9839371}
   m_LocalPosition: {x: 0.79374, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3729,6 +3764,10 @@ PrefabInstance:
       propertyPath: mainScared
       value: 
       objectReference: {fileID: 8300000, guid: a7139ffe7e2e96d4eb5e9b0388e31b27, type: 3}
+    - target: {fileID: 4915692195601061828, guid: 6ad8ee1d8911e2948a9a330fa1b1e27b, type: 3}
+      propertyPath: enemyAttackHit
+      value: 
+      objectReference: {fileID: 8300000, guid: 67ea6b44021024e48b8c35e231e77318, type: 3}
     - target: {fileID: 4915692195601061828, guid: 6ad8ee1d8911e2948a9a330fa1b1e27b, type: 3}
       propertyPath: wereWolfAttackHit
       value: 
@@ -7430,7 +7469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1917016082
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7959,7 +7998,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2049341438
 RectTransform:
   m_ObjectHideFlags: 0

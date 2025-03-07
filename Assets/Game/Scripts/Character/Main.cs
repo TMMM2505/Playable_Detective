@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,10 +9,6 @@ public class Main : CharacterSpine
     [SerializeField] AudioClip enemyAttackHit;
     [SerializeField] AudioClip mainWin;
 
-    private void Awake()
-    {
-        //GameManager.Ins.onWin += MainWin;
-    }
     private void Start()
     {
         StartCoroutine(RandomHelpIntervalLoop());
@@ -29,12 +24,14 @@ public class Main : CharacterSpine
             SoundManager.Instance.PlaySoundFXClip(helpMe, 1, false);
         }
     }
-    private void MainDie()
+    private void MainGetPunched()
     {
         StopAllCoroutines();
 
-        //SoundManager.Ins.PlaySoundFXClip(getHitSfx, transform, 1, false);
+        SoundManager.Instance.PlaySoundFXClip(getHitSfx, 1, false);
         SetAnim(Constant.mainFall2, false);
+
+        GameManager.Instance.onLose?.Invoke();
     }
     private void MainWin()
     {
@@ -50,17 +47,22 @@ public class Main : CharacterSpine
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (GameManager.Instance.gameOver) return;
+
         switch(collision.gameObject.layer)
         {
             case Constant.enemyLayer:
-                //SoundManager.Ins.PlaySoundFXClip(wereWolfAttackHit, transform, 1, false);
-
-                MainDie();
-                GameManager.Instance.onLose?.Invoke();
+                SoundManager.Instance.PlaySoundFXClip(enemyAttackHit, 1, false);
+                MainGetPunched();
                 break;
             case Constant.powerUpLayer:
                 collision.transform.parent.gameObject.SetActive(false);
                 SupermainTransform();
+                break;
+            case Constant.acidBulletLayer:
+                AcidBullet bullet = collision.GetComponentInParent<AcidBullet>();
+                bullet.ActivateExplosionVfx();
+                MainGetPunched();
                 break;
         }
     }

@@ -5,6 +5,7 @@ public class Constant
     public const int enemyLayer = 6;
     public const int playerLayer = 7;
     public const int powerUpLayer = 8;
+    public const int acidBulletLayer = 10;
 
     public const string animIdle = "Idle";
 
