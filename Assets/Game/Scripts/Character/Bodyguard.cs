@@ -15,7 +15,6 @@ public class Bodyguard : CharacterSpine
     [SerializeField] Transform acidFirePos;
 
     private bool isRight;
-    private bool isAttacking;
     private bool isTransformed = false;
 
     // Start is called before the first frame update
@@ -40,22 +39,28 @@ public class Bodyguard : CharacterSpine
     }
     private void CheckForPlayer(IObjectChecker objectChecker)
     {
-        if (isAttacking) return;
+        if (state == ECharacterState.Attack || state == ECharacterState.Dead) return;
 
-        if (objectChecker?.CheckedGameObject.layer != Constant.playerLayer)
+        if ((objectChecker?.CheckedGameObject.layer != Constant.playerLayer) && 
+            (objectChecker?.CheckedGameObject.layer != Constant.invincibleLayer))
         {
+            state = ECharacterState.Idle;
             SetAnim(isTransformed ? Constant.bodyguardV2Idle : Constant.animIdle, true);
             return;
         }
-        SetAnim(isTransformed ? Constant.bodyguardV2Run : Constant.bodyguardWalk, true);
+        if(state != ECharacterState.Move)
+        {
+            state = ECharacterState.Move;
+            SetAnim(isTransformed ? Constant.bodyguardV2Run : Constant.bodyguardWalk, true);
+        }
 
         var targetRelativePos = objectChecker.Position.x - transform.position.x;
 
         var distance = Mathf.Abs(targetRelativePos);
         if(distance <= (isTransformed ? 5f : 1f))
         {
-            isAttacking = true;
-            EnemyAttack(objectChecker.Position);
+            state = ECharacterState.Attack;
+            EnemyAttack(objectChecker);
         }
         else
         {
@@ -65,19 +70,25 @@ public class Bodyguard : CharacterSpine
             }
         }
     }
-    private void EnemyAttack(Vector3 targetCurrentPos)
+    private void EnemyAttack(IObjectChecker target)
     {
+        if(target.CheckedGameObject.layer == Constant.invincibleLayer)
+        {
+            SetAnim(Constant.animIdle, true);
+            return;
+        }
+        
         if (isTransformed)
         {
             SoundManager.Instance.PlaySoundFXClip(v2AttackSfx, 1, false);
-            SetAnim(Constant.bodyguardV2Attack, false, (TrackEntry trackEntry) => isAttacking = false);
+            SetAnim(Constant.bodyguardV2Attack, false, (TrackEntry trackEntry) => state = ECharacterState.Idle);
 
             var toxicBullet = Instantiate(poweredUpBullet, acidFirePos.position, Quaternion.identity);
-            toxicBullet.transform.DOMove(targetCurrentPos, 1f).SetEase(Ease.Linear);
+            toxicBullet.transform.DOMove(target.Position, 1f).SetEase(Ease.Linear);
         }
         else
         {
-            SetAnim(Constant.animEnemyAttack, false, (TrackEntry trackEntry) => isAttacking = false);
+            SetAnim(Constant.animEnemyAttack, false, (TrackEntry trackEntry) => state = ECharacterState.Idle);
         }
     }
 
@@ -87,7 +98,7 @@ public class Bodyguard : CharacterSpine
 
         SoundManager.Instance.PlaySoundFXClip(isTransformed ? gruntV2Sfx : gruntSfx, 1, false); //initial sound
 
-        while (true)
+        while (!GameManager.Instance.gameOver)
         {
             yield return new WaitForSeconds(6.75f);
 
@@ -106,6 +117,10 @@ public class Bodyguard : CharacterSpine
             case Constant.powerUpLayer:
                 collision.transform.parent.gameObject.SetActive(false);
                 BodyguardV2Transform();
+                break;
+            case Constant.invincibleLayer:
+                state = ECharacterState.Dead;
+                SetAnim(Constant.bodyguardDieBySupermain, false, (TrackEntry trackEntry) => GameManager.Instance.onWin?.Invoke());
                 break;
         }
     }

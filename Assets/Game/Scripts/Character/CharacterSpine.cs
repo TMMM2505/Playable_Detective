@@ -7,6 +7,8 @@ public abstract class CharacterSpine : MonoBehaviour, IObjectChecker
 {
     [SerializeField] protected SkeletonAnimation anim;
 
+    internal ECharacterState state;
+
     public GameObject CheckedGameObject => gameObject;
 
     public Vector3 Position => transform.position;
@@ -17,12 +19,11 @@ public abstract class CharacterSpine : MonoBehaviour, IObjectChecker
 
     private void Start()
     {
+        state = ECharacterState.Idle;
         SetAnim(Constant.animIdle, true);
     }
     public void SetAnim(string animName, bool loop, Spine.AnimationState.TrackEntryDelegate onComplete = null)
     {
-        if (anim.AnimationName == animName) return;
-
         anim.loop = loop;
         anim.AnimationName = animName;
         anim.AnimationState.Complete += onComplete;
@@ -38,4 +39,12 @@ public abstract class CharacterSpine : MonoBehaviour, IObjectChecker
         anim.LateUpdate();
         anim.AnimationState.Apply(anim.skeleton);
     }
+}
+public enum ECharacterState
+{
+    Idle,
+    Move,
+    Attack,
+    Dead,
+    Invincible
 }

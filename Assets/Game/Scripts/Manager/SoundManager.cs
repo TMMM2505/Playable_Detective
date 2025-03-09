@@ -15,10 +15,11 @@ public class SoundManager : Singleton<SoundManager>
     {
         PlaySoundFXClip(bgTheme, 1, true);
 
-        //GameManager.Instance.onEndGame += () => OnEndGame(GameManager.Instance.gameLose);
+        GameManager.Instance.onLose += () => OnEndGame(true);
+        GameManager.Instance.onWin += () => OnEndGame(false);
     }
 
-    public void PlaySoundFXClip(AudioClip audioClip, float volume, bool loop, Action onComplete = null)
+    public void PlaySoundFXClip(AudioClip audioClip, float volume, bool loop, bool loopOneShot = false, Action onComplete = null)
     {
         if (loop)
         {
@@ -26,7 +27,7 @@ public class SoundManager : Singleton<SoundManager>
             audioSourceMusic.volume = volume;
             audioSourceMusic.Play();
         }
-        else
+        else if(!loopOneShot)
         {
             audioSourceSound.PlayOneShot(audioClip, volume);
 
@@ -34,8 +35,21 @@ public class SoundManager : Singleton<SoundManager>
             float clipLength = audioClip.length;
             StartCoroutine(DelayedAction(onComplete, clipLength));
         }
-    }
+        else
+        {
+            StartCoroutine(LoopOneShot());
+        }
 
+        IEnumerator LoopOneShot()
+        {
+            while (!GameManager.Instance.gameOver)
+            {
+                audioSourceSound.PlayOneShot(audioClip);
+
+                yield return new WaitForSeconds(audioClip.length);
+            }
+        }
+    }
     void OnEndGame(bool isLose)
     {
         audioSourceMusic.Stop();

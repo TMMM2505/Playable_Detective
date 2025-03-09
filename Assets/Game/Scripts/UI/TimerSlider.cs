@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class IQSlider : MonoBehaviour
+public class TimerSlider : MonoBehaviour
 {
     [SerializeField] Slider slider;
     [SerializeField] float sliderTimer;
@@ -60,13 +60,12 @@ public class IQSlider : MonoBehaviour
     }
     private void EmergencyTriger()
     {
-        //SoundManager.Instance.PlaySoundFXClip(emergencySfx, transform, .5f, true);
+        SoundManager.Instance.PlaySoundFXClip(emergencySfx, .5f, false, true);
         brain.DOColor(emergencyColor, .5f).SetLoops(-1, LoopType.Yoyo);
         numberText.DOColor(emergencyColor, .5f).SetLoops(-1, LoopType.Yoyo);
     }
     private void StopSlider()
     {
-        //SoundManager.Instance.StopSourceByName(emergencySfx.name);
         StopAllCoroutines();
     }
 }
