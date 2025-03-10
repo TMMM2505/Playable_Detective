@@ -44,7 +44,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             while (!GameManager.Instance.gameOver)
             {
-                audioSourceSound.PlayOneShot(audioClip);
+                audioSourceSound.PlayOneShot(audioClip, volume);
 
                 yield return new WaitForSeconds(audioClip.length);
             }
@@ -53,6 +53,7 @@ public class SoundManager : Singleton<SoundManager>
     void OnEndGame(bool isLose)
     {
         audioSourceMusic.Stop();
+        audioSourceSound.Stop();
         audioSourceSound.PlayOneShot(isLose ? loseSfx : winSfx);
     }
     private IEnumerator DelayedAction(Action action, float waitTime)

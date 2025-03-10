@@ -56,6 +56,7 @@ public class TimerSlider : MonoBehaviour
         slider.value = 0;
         numberText.text = "0";
 
+        GameManager.Instance.gameOver = true;
         GameManager.Instance.onLose?.Invoke();
     }
     private void EmergencyTriger()

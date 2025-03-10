@@ -1,0 +1,28 @@
+Box.png
+size:556,556
+filter:Linear,Linear
+pma:true
+scale:0.45
+Blue/Layer 2
+bounds:419,351,203,135
+rotate:90
+Blue/daily_bigreward_gift_2
+bounds:373,159,190,152
+rotate:90
+Layer 1
+bounds:2,375,208,179
+Red/Layer 3
+bounds:212,167,215,159
+rotate:90
+Red/daily_bigreward_gift_3
+bounds:2,172,201,142
+rotate:90
+Violet/Layer 4
+bounds:212,384,205,170
+Violet/daily_bigreward_gift_4
+bounds:289,10,193,147
+daily_bigreward_coin
+bounds:201,43,122,86
+rotate:90
+daily_bigreward_gift_1
+bounds:2,19,197,146

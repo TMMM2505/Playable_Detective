@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class Main : CharacterSpine
 {
+    [Header("Main Audio")]
     [SerializeField] AudioClip mainScared;
     [SerializeField] AudioClip helpMe;
     [SerializeField] AudioClip getHitSfx;
     [SerializeField] AudioClip enemyAttackHit;
     [SerializeField] AudioClip mainWin;
+    [SerializeField] AudioClip supermainTransform;
+    [SerializeField] AudioClip supermainBgTheme;
+
+    [Header("Main Components")]
     [SerializeField] CheckVisionComponent checkVision;
+    [SerializeField] BoxCollider2D handPunch;
+    [SerializeField] GameObject transformFx;
 
     private bool isRight;
 
     private void Start()
     {
+        handPunch.enabled = false;
         StartCoroutine(RandomHelpIntervalLoop());
     }
     private void Update()
@@ -68,9 +76,9 @@ public class Main : CharacterSpine
         StopAllCoroutines();
 
         SoundManager.Instance.PlaySoundFXClip(getHitSfx, 1, false);
-        SetAnim(Constant.mainFall2, false);
 
-        GameManager.Instance.onLose?.Invoke();
+        GameManager.Instance.gameOver = true;
+        SetAnim(Constant.mainFall2, false, (TrackEntry trackEntry) => GameManager.Instance.onLose?.Invoke());
     }
     private void MainPoisonedLose()
     {
@@ -78,25 +86,31 @@ public class Main : CharacterSpine
         StopAllCoroutines();
 
         SoundManager.Instance.PlaySoundFXClip(getHitSfx, 1, false);
-        SetAnim(Constant.mainPoison2, false);
 
-        GameManager.Instance.onLose?.Invoke();
-    }
-    private void MainWin()
-    {
-        StopAllCoroutines();    
-
-        //SoundManager.Ins.PlaySoundFXClip(mainWin, transform, 1, false);
-        SetAnim(Constant.mainWin3, true);
+        GameManager.Instance.gameOver = true;
+        SetAnim(Constant.mainPoison2, false, (TrackEntry trackEntry) => GameManager.Instance.onLose?.Invoke());
     }
     private void SupermainTransform()
     {
+        transformFx.SetActive(true);
+
+        SoundManager.Instance.PlaySoundFXClip(supermainTransform, 1, true);
+        SoundManager.Instance.PlaySoundFXClip(supermainBgTheme, 1, false);
+
         state = ECharacterState.Invincible;
-        ChangeSkin(Constant.supermainSkin);
-        SetAnim(Constant.supermainIdle, true);
+        StartCoroutine(SupermainSkinActivate(1.5f));
 
         gameObject.layer = Constant.invincibleLayer;
+        handPunch.enabled = true;
         checkVision.gameObject.SetActive(true);
+
+        IEnumerator SupermainSkinActivate(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+
+            ChangeSkin(Constant.supermainSkin);
+            SetAnim(Constant.supermainIdle, true);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

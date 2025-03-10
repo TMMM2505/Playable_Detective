@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class InputReceiver : MonoBehaviour
 {
+    internal static Action onFirstClick;
+
+    private bool isFirstClick = false;
     void Update()
     {
         if (Input.GetMouseButton(0))
@@ -26,6 +30,12 @@ public class InputReceiver : MonoBehaviour
                 Pin pin = hits[i].collider.gameObject.GetComponent<Pin>();
                 if (pin)
                 {
+                    if(!isFirstClick)
+                    {
+                        onFirstClick?.Invoke();
+                        isFirstClick = true;
+                    }
+
                     pin.ActivePin();
                 }
             }

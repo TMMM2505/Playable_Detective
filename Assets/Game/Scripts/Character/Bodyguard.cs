@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class Bodyguard : CharacterSpine
 {
+    [Header("Bodyguard Audio")]
     [SerializeField] private AudioClip gruntSfx;
     [SerializeField] private AudioClip gruntV2Sfx;
     [SerializeField] private AudioClip v2AttackSfx;
+    [SerializeField] AudioClip mainPunchSfx;
 
+    [Header("Bodyguard Components")]
     [SerializeField] CheckVisionComponent checkVision;
     [SerializeField] float speedMove = 5f;
     [SerializeField] GameObject poweredUpBullet;
     [SerializeField] Transform acidFirePos;
+    [SerializeField] GameObject transformFx;
 
     private bool isRight;
     private bool isTransformed = false;
@@ -20,6 +24,7 @@ public class Bodyguard : CharacterSpine
     // Start is called before the first frame update
     void Start()
     {
+        transformFx.SetActive(false);
         StartCoroutine(RandomRoarIntervalLoop());   
     }
     private void Update()
@@ -107,11 +112,21 @@ public class Bodyguard : CharacterSpine
     }
     private void BodyguardV2Transform()
     {
-        SetAnim(Constant.bodyguardV2Idle, true);
-        isTransformed = true;
+        transformFx.SetActive(true);
+        StartCoroutine(Transform(.5f));
+        
+        IEnumerator Transform(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+
+            SetAnim(Constant.bodyguardV2Idle, true);
+            isTransformed = true;
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (state == ECharacterState.Dead) return;
+
         switch (collision.gameObject.layer)
         {
             case Constant.powerUpLayer:
@@ -120,6 +135,9 @@ public class Bodyguard : CharacterSpine
                 break;
             case Constant.invincibleLayer:
                 state = ECharacterState.Dead;
+                SoundManager.Instance.PlaySoundFXClip(mainPunchSfx, 1, false);
+
+                GameManager.Instance.gameOver = true;
                 SetAnim(Constant.bodyguardDieBySupermain, false, (TrackEntry trackEntry) => GameManager.Instance.onWin?.Invoke());
                 break;
         }

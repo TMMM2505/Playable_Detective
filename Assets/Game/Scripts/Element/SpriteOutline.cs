@@ -1,69 +1,47 @@
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class SpriteOutline : MonoBehaviour
 {
-    public Color color = Color.white;
+    [SerializeField] Hand hand;
+    [SerializeField] bool rightSide;
 
-    [SerializeField]
-    private SpriteRenderer _spriteRenderer;
+    private TweenerCore<Color, Color, ColorOptions> ongoingColorTween;
+    private SpriteRenderer outline;
+    private Color originalColor;
+    private Color faintColor;
 
-    public SpriteRenderer spriteRenderer
+    private void Awake()
     {
-        get
+        hand.onHandFlip += ActivateGlow;
+        InputReceiver.onFirstClick += DeactivateGlow;
+    }
+    private void Start()
+    {
+        outline = GetComponent<SpriteRenderer>();
+
+        originalColor = outline.color;
+        faintColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0);
+
+        outline.color = faintColor; // set alpha to zero at the start of the game 
+    }
+    private void ActivateGlow()
+    {
+        if(hand.isRight != rightSide)
         {
-            if (_spriteRenderer == null)
-            {
-                _spriteRenderer = GetComponent<SpriteRenderer>();
-            }
-            return _spriteRenderer;
+            ongoingColorTween?.Kill();
+            outline.color = faintColor;
+        }
+        else
+        {
+            ongoingColorTween = outline.DOColor(originalColor, .5f).SetLoops(-1, LoopType.Yoyo);
         }
     }
-    [SerializeField]
-    private float _outlineSize = 0;
-
-    private Material _preMat;
-
-    void OnEnable()
+    private void DeactivateGlow()
     {
-        _preMat = spriteRenderer.sharedMaterial;
-        spriteRenderer.sharedMaterial = defaultMaterial;
-        UpdateOutline(_outlineSize);
-    }
-
-    void OnDisable()
-    {
-        spriteRenderer.sharedMaterial = _preMat;
-    }
-
-    public void UpdateOutline(float outline)
-    {
-        MaterialPropertyBlock mpb = new MaterialPropertyBlock();
-        spriteRenderer.GetPropertyBlock(mpb);
-        mpb.SetFloat("_OutlineSize", outline);
-        mpb.SetColor("_OutlineColor", color);
-        spriteRenderer.SetPropertyBlock(mpb);
-    }
-
-    void OnValidate()
-    {
-        if (enabled)
-        {
-            UpdateOutline(_outlineSize);
-        }
-    }
-
-
-    private static Material _defaultMaterial = null;
-    public static Material defaultMaterial
-    {
-        get
-        {
-            if (_defaultMaterial == null)
-            {
-                _defaultMaterial = Resources.Load<Material>("Sprite-Outline");
-            }
-            return _defaultMaterial;
-        }
+        gameObject.SetActive(false);
+        InputReceiver.onFirstClick -= DeactivateGlow;
     }
 }
