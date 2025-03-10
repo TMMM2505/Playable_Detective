@@ -1546,7 +1546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: {fileID: 2014884200}
   tutorialText: {fileID: 1615551586}
-  iqSlider: {fileID: 1287328704}
+  timerSlider: {fileID: 1287328704}
   endgamePopup: {fileID: 2049341438}
   gameIcon: {fileID: 927431581}
 --- !u!1 &157627264
@@ -3393,6 +3393,8 @@ MonoBehaviour:
   gruntV2Sfx: {fileID: 8300000, guid: b176200c394dd6b45b8f68fb6f21e945, type: 3}
   v2AttackSfx: {fileID: 8300000, guid: 71b9934062d67c141a3f3c5ebd05b8a6, type: 3}
   mainPunchSfx: {fileID: 8300000, guid: b409da13c67b4634cad00a9ab8e35936, type: 3}
+  dieSfx: {fileID: 8300000, guid: 1b6ffdcf49a98874db9558a6d4c11f59, type: 3}
+  transformSfx: {fileID: 0}
   checkVision: {fileID: 1604063319}
   speedMove: 0.5
   poweredUpBullet: {fileID: 7734693050173939272, guid: dd7cac5aec85dd64c8707802be8143dd, type: 3}
@@ -10810,7 +10812,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 300, y: 25}
+  m_AnchoredPosition: {x: 300, y: 116}
   m_SizeDelta: {x: 512, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &927431582
@@ -17495,11 +17497,11 @@ Transform:
   m_GameObject: {fileID: 1526898436}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: -489, z: 0}
+  m_LocalPosition: {x: -4, y: -499.00003, z: 0}
   m_LocalScale: {x: 69, y: 69, z: 69}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1917016082}
+  m_Father: {fileID: 2049341438}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1529645682
 GameObject:
@@ -21413,7 +21415,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1526898440}
   - {fileID: 2049341438}
   m_Father: {fileID: 1372485784}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22907,6 +22908,7 @@ RectTransform:
   - {fileID: 423830599}
   - {fileID: 1035345518}
   - {fileID: 2061672670}
+  - {fileID: 1526898440}
   m_Father: {fileID: 1917016082}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

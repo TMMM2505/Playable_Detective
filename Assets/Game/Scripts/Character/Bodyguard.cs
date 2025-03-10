@@ -6,10 +6,12 @@ using UnityEngine;
 public class Bodyguard : CharacterSpine
 {
     [Header("Bodyguard Audio")]
-    [SerializeField] private AudioClip gruntSfx;
-    [SerializeField] private AudioClip gruntV2Sfx;
-    [SerializeField] private AudioClip v2AttackSfx;
+    [SerializeField] AudioClip gruntSfx;
+    [SerializeField] AudioClip gruntV2Sfx;
+    [SerializeField] AudioClip v2AttackSfx;
     [SerializeField] AudioClip mainPunchSfx;
+    [SerializeField] AudioClip dieSfx;
+    [SerializeField] AudioClip transformSfx;
 
     [Header("Bodyguard Components")]
     [SerializeField] CheckVisionComponent checkVision;
@@ -62,7 +64,7 @@ public class Bodyguard : CharacterSpine
         var targetRelativePos = objectChecker.Position.x - transform.position.x;
 
         var distance = Mathf.Abs(targetRelativePos);
-        if(distance <= (isTransformed ? 5f : 1f))
+        if(distance <= (isTransformed ? 5f : 1f) * transform.parent.localScale.x)
         {
             state = ECharacterState.Attack;
             EnemyAttack(objectChecker);
@@ -109,6 +111,7 @@ public class Bodyguard : CharacterSpine
 
             SoundManager.Instance.PlaySoundFXClip(isTransformed ? gruntV2Sfx : gruntSfx, 1, false);
         }
+        StopCoroutine(RandomRoarIntervalLoop());
     }
     private void BodyguardV2Transform()
     {
@@ -120,6 +123,7 @@ public class Bodyguard : CharacterSpine
             yield return new WaitForSeconds(waitTime);
 
             SetAnim(Constant.bodyguardV2Idle, true);
+            SoundManager.Instance.PlaySoundFXClip(gruntV2Sfx, 1, false);
             isTransformed = true;
         }
     }
@@ -130,12 +134,15 @@ public class Bodyguard : CharacterSpine
         switch (collision.gameObject.layer)
         {
             case Constant.powerUpLayer:
+                //SoundManager.Instance.PlaySoundFXClip(transformSfx, 1, false);
+
                 collision.transform.parent.gameObject.SetActive(false);
                 BodyguardV2Transform();
                 break;
             case Constant.invincibleLayer:
                 state = ECharacterState.Dead;
                 SoundManager.Instance.PlaySoundFXClip(mainPunchSfx, 1, false);
+                SoundManager.Instance.PlaySoundFXClip(dieSfx, 1, false);
 
                 GameManager.Instance.gameOver = true;
                 SetAnim(Constant.bodyguardDieBySupermain, false, (TrackEntry trackEntry) => GameManager.Instance.onWin?.Invoke());

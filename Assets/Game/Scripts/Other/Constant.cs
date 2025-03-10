@@ -25,6 +25,7 @@ public class Constant
     public const string supermainSkin = "Supermain";
     public const string supermainIdle = "Supermain/Idle";
     public const string supermainAttack = "Supermain/Attack";
+    public const string supermainWin = "Supermain/Win";
 
     public const string textIdleAnim = "idle";
     public const string textShowAnim = "show";

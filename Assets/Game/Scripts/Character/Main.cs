@@ -18,12 +18,12 @@ public class Main : CharacterSpine
     [SerializeField] BoxCollider2D handPunch;
     [SerializeField] GameObject transformFx;
 
-    private bool isRight;
-
     private void Start()
     {
         handPunch.enabled = false;
         StartCoroutine(RandomHelpIntervalLoop());
+
+        GameManager.Instance.onWin += MainWin;
     }
     private void Update()
     {
@@ -31,12 +31,12 @@ public class Main : CharacterSpine
 
         if (anim.transform.localScale.x < 0)
         {
-            isRight = false;
+            //isRight = false;
             CheckForEnemy(checkVision.CheckVisionLeft());
         }
         else
         {
-            isRight = true;
+            //isRight = true;
             CheckForEnemy(checkVision.CheckVisionRight());
         }
     }
@@ -48,7 +48,7 @@ public class Main : CharacterSpine
         var targetRelativePos = objectChecker.Position.x - transform.position.x;
 
         var distance = Mathf.Abs(targetRelativePos);
-        if (distance <= 1f)
+        if (distance <= 1f * transform.parent.localScale.x)
         {
             state = ECharacterState.Attack;
             SupermainAttack(objectChecker);
@@ -69,6 +69,7 @@ public class Main : CharacterSpine
 
             SoundManager.Instance.PlaySoundFXClip(helpMe, 1, false);
         }
+        StopCoroutine(RandomHelpIntervalLoop());
     }
     private void MainPunchedLose()
     {
@@ -89,6 +90,10 @@ public class Main : CharacterSpine
 
         GameManager.Instance.gameOver = true;
         SetAnim(Constant.mainPoison2, false, (TrackEntry trackEntry) => GameManager.Instance.onLose?.Invoke());
+    }
+    private void MainWin()
+    {
+        SetAnim(Constant.supermainWin, true);
     }
     private void SupermainTransform()
     {
@@ -114,7 +119,7 @@ public class Main : CharacterSpine
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (state == ECharacterState.Attack || state == ECharacterState.Invincible) return;
+        if (state == ECharacterState.Attack || state == ECharacterState.Invincible | state == ECharacterState.Dead) return;
 
         switch(collision.gameObject.layer)
         {
