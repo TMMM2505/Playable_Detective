@@ -4,19 +4,11 @@ using System;
 using Spine;
 using System.Collections;
 
-public abstract class CharacterSpine : MonoBehaviour, IObjectChecker
+public abstract class CharacterSpine : MonoBehaviour
 {
     [SerializeField] protected SkeletonAnimation anim;
 
     internal ECharacterState state;
-
-    public GameObject CheckedGameObject => gameObject;
-
-    public Vector3 Position => transform.position;
-
-    public bool IsCompleted { get; set; }
-
-    public Vector3 CenterPosition => throw new NotImplementedException();
 
     private void Start()
     {

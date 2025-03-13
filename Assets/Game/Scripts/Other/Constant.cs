@@ -12,20 +12,11 @@ public class Constant
 
     public const string animEnemyAttack = "Attack";
 
-    public const string bodyguardWalk = "Walk";
-    public const string bodyguardDieBySupermain = "Die_Supermain";
-    public const string bodyguardV2Idle = "Bodyguard_ver2/Idle";
-    public const string bodyguardV2Attack = "Bodyguard_ver2/Attack";
-    public const string bodyguardV2Run = "Bodyguard_ver2/Run";
+    public const string mainPanic = "Kien22/1";
+    public const string mainCallForHelp = "Kien22/2";
 
-    public const string mainFall2 = "Fall2";
-    public const string mainWin3 = "Win3";
-    public const string mainPoison2 = "Poisoning2";
-
-    public const string supermainSkin = "Supermain";
-    public const string supermainIdle = "Supermain/Idle";
-    public const string supermainAttack = "Supermain/Attack";
-    public const string supermainWin = "Supermain/Win";
+    public const string puppyIdle = "Kien/3";
+    public const string puppyJumpingForHelp = "Kien/4";
 
     public const string textIdleAnim = "idle";
     public const string textShowAnim = "show";
