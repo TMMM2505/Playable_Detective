@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Spine;
 using System.Collections;
 using UnityEngine;
 
@@ -88,14 +87,14 @@ public class Bodyguard : CharacterSpine
         if (isTransformed)
         {
             SoundManager.Instance.PlaySoundFXClip(v2AttackSfx, 1, false);
-            SetAnim(Constant.bodyguardV2Attack, false, (TrackEntry trackEntry) => state = ECharacterState.Idle);
+            SetAnim(Constant.bodyguardV2Attack, false, () => state = ECharacterState.Idle);
 
             var toxicBullet = Instantiate(poweredUpBullet, acidFirePos.position, Quaternion.identity);
             toxicBullet.transform.DOMove(target.Position, 1f).SetEase(Ease.Linear);
         }
         else
         {
-            SetAnim(Constant.animEnemyAttack, false, (TrackEntry trackEntry) => state = ECharacterState.Idle);
+            SetAnim(Constant.animEnemyAttack, false, () => state = ECharacterState.Idle);
         }
     }
 
@@ -129,12 +128,12 @@ public class Bodyguard : CharacterSpine
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (state == ECharacterState.Dead) return;
+        if (state == ECharacterState.Dead || GameManager.Instance.gameOver) return;
 
         switch (collision.gameObject.layer)
         {
             case Constant.powerUpLayer:
-                //SoundManager.Instance.PlaySoundFXClip(transformSfx, 1, false);
+                SoundManager.Instance.PlaySoundFXClip(transformSfx, 1, false);
 
                 collision.transform.parent.gameObject.SetActive(false);
                 BodyguardV2Transform();
@@ -145,7 +144,7 @@ public class Bodyguard : CharacterSpine
                 SoundManager.Instance.PlaySoundFXClip(dieSfx, 1, false);
 
                 GameManager.Instance.gameOver = true;
-                SetAnim(Constant.bodyguardDieBySupermain, false, (TrackEntry trackEntry) => GameManager.Instance.onWin?.Invoke());
+                SetAnim(Constant.bodyguardDieBySupermain, false, () => GameManager.Instance.onWin?.Invoke());
                 break;
         }
     }

@@ -1,4 +1,3 @@
-using Spine;
 using System.Collections;
 using UnityEngine;
 
@@ -56,7 +55,7 @@ public class Main : CharacterSpine
     }
     private void SupermainAttack(IObjectChecker objectChecker)
     {
-        SetAnim(Constant.supermainAttack, false, (TrackEntry trackEntry) => state = ECharacterState.Invincible);
+        SetAnim(Constant.supermainAttack, false, () => state = ECharacterState.Invincible);
     }
 
     private IEnumerator RandomHelpIntervalLoop()
@@ -79,7 +78,7 @@ public class Main : CharacterSpine
         SoundManager.Instance.PlaySoundFXClip(getHitSfx, 1, false);
 
         GameManager.Instance.gameOver = true;
-        SetAnim(Constant.mainFall2, false, (TrackEntry trackEntry) => GameManager.Instance.onLose?.Invoke());
+        SetAnim(Constant.mainFall2, false, () => GameManager.Instance.onLose?.Invoke());
     }
     private void MainPoisonedLose()
     {
@@ -89,7 +88,7 @@ public class Main : CharacterSpine
         SoundManager.Instance.PlaySoundFXClip(getHitSfx, 1, false);
 
         GameManager.Instance.gameOver = true;
-        SetAnim(Constant.mainPoison2, false, (TrackEntry trackEntry) => GameManager.Instance.onLose?.Invoke());
+        SetAnim(Constant.mainPoison2, false, () => GameManager.Instance.onLose?.Invoke());
     }
     private void MainWin()
     {

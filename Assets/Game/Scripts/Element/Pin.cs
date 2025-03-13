@@ -9,7 +9,6 @@ public class Pin : MonoBehaviour
     [SerializeField] private Transform center;
 
     [SerializeField] private float speed;
-
     [SerializeField] private AudioClip dragPin;
 
     internal Action onClick;

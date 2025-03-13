@@ -6,7 +6,6 @@ public class GameManager : Singleton<GameManager>
     internal bool gameOver = false;
     internal Action onLose;
     internal Action onWin;
-
     public void TriggerCTA()
     {
         Debug.Log("triggerCTA");

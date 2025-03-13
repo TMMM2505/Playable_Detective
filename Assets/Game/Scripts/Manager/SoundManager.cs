@@ -49,17 +49,17 @@ public class SoundManager : Singleton<SoundManager>
                 yield return new WaitForSeconds(audioClip.length);
             }
         }
-        IEnumerator DelayedAction(Action action, float waitTime)
-        {
-            yield return new WaitForSeconds(waitTime);
-
-            action?.Invoke();
-        }
     }
     void OnEndGame(bool isLose)
     {
         audioSourceMusic.Stop();
         audioSourceSound.Stop();
         audioSourceSound.PlayOneShot(isLose ? loseSfx : winSfx);
+    }
+    private IEnumerator DelayedAction(Action action, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        action?.Invoke();
     }
 }

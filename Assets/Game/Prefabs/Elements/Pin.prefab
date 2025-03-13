@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 3184955528865027054}
   - component: {fileID: 2210107125546608877}
   m_Layer: 9
-  m_Name: Outline
+  m_Name: Pin Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

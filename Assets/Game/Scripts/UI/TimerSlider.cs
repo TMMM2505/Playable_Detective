@@ -53,11 +53,20 @@ public class TimerSlider : MonoBehaviour
 
             yield return null;
         }
-        slider.value = 0;
-        numberText.text = "0";
 
-        GameManager.Instance.gameOver = true;
-        GameManager.Instance.onLose?.Invoke();
+        if(!GameManager.Instance.gameOver) //if game hasn't ended with a win yet
+        {
+            slider.value = 0;
+            numberText.text = "0";
+
+            GameManager.Instance.gameOver = true;
+            GameManager.Instance.onLose?.Invoke();
+        }
+        else
+        {
+            slider.value = 1;
+            numberText.text = "1";
+        }
     }
     private void EmergencyTriger()
     {

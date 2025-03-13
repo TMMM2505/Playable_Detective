@@ -7,6 +7,8 @@ using UnityEngine;
 public class Hand : MonoBehaviour
 {
     [SerializeField] List<Transform> destinations;
+    [SerializeField] List<Pin> linkedPins;
+    [SerializeField] List<Hand> activateHandsOnInactive;
     [SerializeField] float waitTime;
 
     internal Action onHandFlip;
@@ -14,7 +16,27 @@ public class Hand : MonoBehaviour
 
     private void Awake()
     {
-        InputReceiver.onFirstClick += DeactivateHand;
+        if (activateHandsOnInactive.Count > 0)
+        {
+            foreach (var hand in activateHandsOnInactive)
+            {
+                hand.gameObject.SetActive(false);
+            }
+        }
+    }
+    private void OnEnable()
+    {
+        foreach(var pin in linkedPins)
+        {
+            pin.onClick += DeactivateHand;
+        }
+    }
+    private void OnDisable()
+    {
+        foreach (var pin in linkedPins)
+        {
+            pin.onClick -= DeactivateHand;
+        }
     }
     private void Start()
     {
@@ -22,6 +44,8 @@ public class Hand : MonoBehaviour
     }
     private IEnumerator MoveToDestinations()
     {
+        if (destinations.Count == 0) yield break;
+
         onHandFlip?.Invoke(); //initial position invoke
 
         while (true)
@@ -55,6 +79,13 @@ public class Hand : MonoBehaviour
     private void DeactivateHand()
     {
         gameObject.SetActive(false);
-        InputReceiver.onFirstClick -= DeactivateHand;
+
+        if(activateHandsOnInactive.Count > 0)
+        {
+            foreach(var hand in activateHandsOnInactive)
+            {
+                hand.gameObject.SetActive(true);   
+            }
+        }
     }
 }

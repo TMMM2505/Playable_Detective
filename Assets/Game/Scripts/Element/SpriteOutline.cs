@@ -1,12 +1,19 @@
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpriteOutline : MonoBehaviour
 {
-    [SerializeField] Hand hand;
-    [SerializeField] bool rightSide;
+    //[SerializeField] List<Pin> linkedPins;
+    [SerializeField] List<SpriteOutline> glowBatonPass;
+    [SerializeField] bool isFirstGlow;
+    //[SerializeField] Hand hand;
+    //[SerializeField] bool rightSide;
+
+    internal Action onGlowComplete;
 
     private TweenerCore<Color, Color, ColorOptions> ongoingColorTween;
     private SpriteRenderer outline;
@@ -15,8 +22,29 @@ public class SpriteOutline : MonoBehaviour
 
     private void Awake()
     {
-        hand.onHandFlip += ActivateGlow;
-        InputReceiver.onFirstClick += DeactivateGlow;
+        if (isFirstGlow) return;
+
+        gameObject.SetActive(false);
+    }
+    private void OnEnable()
+    {
+        if(glowBatonPass.Count > 0)
+        {
+            foreach(SpriteOutline glow in glowBatonPass)
+            {
+                onGlowComplete += () => glow.gameObject.SetActive(true);
+            }
+        }
+    }
+    private void OnDisable()
+    {
+        if (glowBatonPass.Count > 0)
+        {
+            foreach (SpriteOutline glow in glowBatonPass)
+            {
+                onGlowComplete -= () => glow.gameObject.SetActive(true);
+            }
+        }
     }
     private void Start()
     {
@@ -26,22 +54,34 @@ public class SpriteOutline : MonoBehaviour
         faintColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0);
 
         outline.color = faintColor; // set alpha to zero at the start of the game 
+
+        ActivateGlowOneShot(4);
     }
-    private void ActivateGlow()
+    //private void ActivateGlow()
+    //{
+    //    if(hand.isRight != rightSide)
+    //    {
+    //        ongoingColorTween?.Kill();
+    //        outline.color = faintColor;
+    //    }
+    //    else
+    //    {
+    //        ongoingColorTween = outline.DOColor(originalColor, .5f).SetLoops(-1, LoopType.Yoyo);
+    //    }
+    //}
+    private void ActivateGlowOneShot(int loopTime)
     {
-        if(hand.isRight != rightSide)
-        {
-            ongoingColorTween?.Kill();
-            outline.color = faintColor;
-        }
-        else
-        {
-            ongoingColorTween = outline.DOColor(originalColor, .5f).SetLoops(-1, LoopType.Yoyo);
-        }
+        outline.DOColor(originalColor, .5f).SetLoops(loopTime, LoopType.Yoyo).onComplete += OnGlowComplete;
     }
+
+    private void OnGlowComplete()
+    {
+        onGlowComplete?.Invoke();
+        DeactivateGlow();   
+    }
+
     private void DeactivateGlow()
     {
         gameObject.SetActive(false);
-        InputReceiver.onFirstClick -= DeactivateGlow;
     }
 }

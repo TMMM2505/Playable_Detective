@@ -2,6 +2,7 @@ using UnityEngine;
 using Spine.Unity;
 using System;
 using Spine;
+using System.Collections;
 
 public abstract class CharacterSpine : MonoBehaviour, IObjectChecker
 {
@@ -22,11 +23,22 @@ public abstract class CharacterSpine : MonoBehaviour, IObjectChecker
         state = ECharacterState.Idle;
         SetAnim(Constant.animIdle, true);
     }
-    public void SetAnim(string animName, bool loop, Spine.AnimationState.TrackEntryDelegate onComplete = null)
+    public void SetAnim(string animName, bool loop, Action onComplete = null)
     {
+        if (anim.name == animName) return;
+
         anim.loop = loop;
         anim.AnimationName = animName;
-        anim.AnimationState.Complete += onComplete;
+
+        var currentAnimationData = anim.Skeleton.Data.FindAnimation(animName);
+        StartCoroutine(InvokeActionAfterComplete(currentAnimationData.Duration));
+
+        IEnumerator InvokeActionAfterComplete(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);  
+
+            onComplete?.Invoke();
+        }
     }
 
     public void ChangeSkin(string skinName)
