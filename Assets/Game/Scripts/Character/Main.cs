@@ -12,20 +12,24 @@ public class Main : CharacterSpine
     {
         StartCoroutine(RandomHelpIntervalLoop());
 
+        linkedOutline.onGlowComplete += MainCallingForHelp;
         GameManager.Instance.onWin += MainWin;
     }
 
     private IEnumerator RandomHelpIntervalLoop()
     {
-        SoundManager.Instance.PlaySoundFXClip(helpMe, 1, false); //initial sound
-
         while (state != ECharacterState.Invincible && !GameManager.Instance.gameOver)
         {
             yield return new WaitForSeconds(6f);
 
-            SoundManager.Instance.PlaySoundFXClip(helpMe, 1, false);
+            MainCallingForHelp();
         }
         StopCoroutine(RandomHelpIntervalLoop());
+    }
+    public void MainCallingForHelp()
+    {
+        SoundManager.Instance.PlaySoundFXClip(helpMe, 1, false);
+        SetAnim(Constant.mainCallForHelp, false, () => SetAnim(Constant.mainPanic, true));
     }
 
     private void MainWin()

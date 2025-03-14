@@ -5,7 +5,7 @@ public class ElementsOrientationScale : MonoBehaviour
 {
     [SerializeField] GameObject level;
     [SerializeField] TMP_Text tutorialText;
-    [SerializeField] RectTransform timerSlider;
+    //[SerializeField] RectTransform timerSlider;
     [SerializeField] RectTransform endgamePopup;
     [SerializeField] RectTransform gameIcon;
 
@@ -22,22 +22,22 @@ public class ElementsOrientationScale : MonoBehaviour
     }   
     private void LevelMapPortraitTransform()
     {
-        level.transform.position = new Vector3(0, 1.8f, 0);
+        level.transform.position = new Vector3(0, 2.6f, 0);
         level.transform.localScale = Vector3.one;
     }
     private void LevelMapLandscapeTransform()
     {
-        level.transform.position = new Vector3(0.5f, 3.8f, 0);
-        level.transform.localScale = Vector3.one * 1.5f;
+        level.transform.position = new Vector3(0, 4, 0);
+        level.transform.localScale = Vector3.one * 1.35f;
     }
     private void SliderCanvasPortraitTransform()
     {
-        tutorialText.rectTransform.localPosition = new Vector3(0, 713f, 0);
-        tutorialText.fontSize = 65;
+        tutorialText.rectTransform.localPosition = new Vector3(0, 850f, 0);
+        tutorialText.fontSize = 100;
         tutorialText.enableWordWrapping = false;
 
-        timerSlider.localPosition = new Vector3(0, 899, 0);
-        timerSlider.localScale = Vector3.one * 1.25f;
+        //timerSlider.localPosition = new Vector3(0, 899, 0);
+        //timerSlider.localScale = Vector3.one * 1.25f;
     }
     private void SliderCanvasLandscapeTransform()
     {
@@ -45,8 +45,8 @@ public class ElementsOrientationScale : MonoBehaviour
         tutorialText.fontSize = 44f;
         tutorialText.enableWordWrapping = true;
 
-        timerSlider.localPosition = new Vector3(-300, 160, 0);
-        timerSlider.localScale = Vector3.one * 0.6f;
+        //timerSlider.localPosition = new Vector3(-300, 160, 0);
+        //timerSlider.localScale = Vector3.one * 0.6f;
     }
     private void EndgamePopupPortraitTransform()
     {

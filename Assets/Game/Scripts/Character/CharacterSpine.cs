@@ -7,6 +7,7 @@ using System.Collections;
 public abstract class CharacterSpine : MonoBehaviour
 {
     [SerializeField] protected SkeletonAnimation anim;
+    [SerializeField] protected SpriteOutline linkedOutline; //this could be anything, mainly use for event after glow complete
 
     internal ECharacterState state;
 

@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,25 +7,20 @@ public class Hand : MonoBehaviour
 {
     [SerializeField] List<Transform> destinations;
     [SerializeField] List<Pin> linkedPins;
-    [SerializeField] List<Hand> activateHandsOnInactive;
+    [SerializeField] SpriteOutline linkedOutline;
     [SerializeField] float waitTime;
-
-    internal Action onHandFlip;
-    internal bool isRight;
-
+    [SerializeField] GameObject inputManager;
     private void Awake()
     {
-        if (activateHandsOnInactive.Count > 0)
-        {
-            foreach (var hand in activateHandsOnInactive)
-            {
-                hand.gameObject.SetActive(false);
-            }
-        }
+        linkedOutline.onGlowComplete += ActivateHand;
+
+        inputManager.SetActive(false);
+        gameObject.SetActive(false);
     }
+
     private void OnEnable()
     {
-        foreach(var pin in linkedPins)
+        foreach (var pin in linkedPins)
         {
             pin.onClick += DeactivateHand;
         }
@@ -46,7 +40,7 @@ public class Hand : MonoBehaviour
     {
         if (destinations.Count == 0) yield break;
 
-        onHandFlip?.Invoke(); //initial position invoke
+        inputManager.SetActive(true);
 
         while (true)
         {
@@ -54,38 +48,35 @@ public class Hand : MonoBehaviour
             {
                 yield return new WaitForSeconds(waitTime);
 
-                transform.DOMove(destination.position, 0.5f).onComplete += HandFlip;
+                transform.DOMove(destination.position, 0.5f);
             }
         }
     }
 
-    private void HandFlip()
+    //private void HandFlip()
+    //{
+    //    Vector3 handRotation = new Vector3(0, 0, transform.rotation.eulerAngles.z * -1);
+    //    transform.rotation = Quaternion.Euler(handRotation);    
+    //    GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+
+    //    if(GetComponent<SpriteRenderer>().flipX)
+    //    {
+    //        isRight = false; 
+    //    }
+    //    else
+    //    {
+    //        isRight = true;    
+    //    }
+    //    onHandFlip?.Invoke();    
+    //}
+    private void ActivateHand()
     {
-        Vector3 handRotation = new Vector3(0, 0, transform.rotation.eulerAngles.z * -1);
-        transform.rotation = Quaternion.Euler(handRotation);    
-        GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+        gameObject.SetActive(true);
 
-        if(GetComponent<SpriteRenderer>().flipX)
-        {
-            isRight = false; 
-        }
-        else
-        {
-            isRight = true;    
-        }
-        onHandFlip?.Invoke();    
+        linkedOutline.onGlowComplete -= ActivateHand;
     }
-
     private void DeactivateHand()
     {
         gameObject.SetActive(false);
-
-        if(activateHandsOnInactive.Count > 0)
-        {
-            foreach(var hand in activateHandsOnInactive)
-            {
-                hand.gameObject.SetActive(true);   
-            }
-        }
     }
 }
