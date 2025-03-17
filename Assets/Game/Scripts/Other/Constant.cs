@@ -2,6 +2,7 @@ public class Constant
 {
     public const string tagLava = "Lava";
 
+    public const int waterLayer = 4;
     public const int enemyLayer = 6;
     public const int playerLayer = 7;
     public const int powerUpLayer = 8;

@@ -17,6 +17,12 @@ public class InteractableWater : MonoBehaviour
     [Header("Gizmo")]
     [SerializeField] internal Color GizmoColor = Color.white;
 
+    [Header("Linked Water Flow")]
+    [SerializeField] InteractableWater connectedWaterFlow;
+    [SerializeField] float pumpRatio = 1.4f;
+
+    internal float waterSurfacePos => GetComponent<MeshRenderer>().bounds.center.y + GetComponent<MeshRenderer>().bounds.extents.y;
+
     private Mesh _mesh;
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
@@ -116,6 +122,21 @@ public class InteractableWater : MonoBehaviour
         _mesh.RecalculateBounds();
 
         _meshFilter.mesh = _mesh;
+    }
+    public void UpdateDimensions(float calculatedWidth, float calculatedHeight)
+    {
+        Width += calculatedWidth;
+        Height += calculatedHeight;
+
+        GenerateMesh();
+        ResetEdgeCollider();
+
+        transform.position += new Vector3(calculatedWidth / 2, calculatedHeight / 2, 0);
+
+        if(connectedWaterFlow != null)
+        {
+            connectedWaterFlow.UpdateDimensions(Mathf.Abs(calculatedWidth) / pumpRatio, Mathf.Abs(calculatedHeight) / pumpRatio); 
+        }
     }
 }
 

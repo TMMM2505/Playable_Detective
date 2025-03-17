@@ -52,3 +52,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: SortingTexture
+    uniqueID: 1963045643
+    locked: 0

@@ -1,0 +1,48 @@
+report@config:load 30.52
+Found a stored user info, but it is no longer valid.
+Permissions were validated successfully.
+report@account:authorize 1548.37
+Exporting assets from Unity.......................
+
+[ Stage1 ] Assets exported from Unity and staged for further processing
+report@unity:export 20222.41
+report@config:load 50.94
+Using C:/Users/Dang Do/Documents/Unity Projects/PlayableDetective/Assets/TextMesh Pro/Fonts/LiberationSans.ttf file to generate an atlas for LiberationSans[29874] font
+  Using alphabet  §1234567890-=qwertyuiop[]asdfghjkl;'\`zxcvbnm,./±!@#$%^&*()_+QWERTYUIOP{}ASDFGHJKL:"|~ZXCVBNM<>?
+Using C:/Users/Dang Do/Documents/Unity Projects/PlayableDetective/Assets/TextMesh Pro/Fonts/BoldenVan.ttf file to generate an atlas for BoldenVan[29880] font
+  Using alphabet  §1234567890-=qwertyuiop[]asdfghjkl;'\`zxcvbnm,./±!@#$%^&*()_+QWERTYUIOP{}ASDFGHJKL:"|~ZXCVBNM<>?
+Combined 97 glyphs into bitmap texture at C:/Users/Dang Do/Documents/Unity Projects/PlayableDetective/LunaTemp/stage1/tmp/fonts/LiberationSans-29874/output_0.png (56kb)
+Combined 97 glyphs into bitmap texture at C:/Users/Dang Do/Documents/Unity Projects/PlayableDetective/LunaTemp/stage1/tmp/fonts/BoldenVan-29880/output_0.png (62kb)
+Found custom rules for texture Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+  {"maxWidth":512,"maxHeight":512,"format":"png32","compression":"none","quality":65,"script":"","ext":"","name":"Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset","isOverride":true}
+Found custom rules for texture Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+  {"maxWidth":512,"maxHeight":512,"format":"png32","compression":"none","quality":65,"script":"","ext":"","name":"Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset","isOverride":true}
+Found custom rules for texture Assets/TextMesh Pro/Fonts/BoldenVan SDF.asset
+  {"maxWidth":512,"maxHeight":512,"format":"png32","compression":"none","quality":65,"script":"","ext":"","name":"Assets/TextMesh Pro/Fonts/BoldenVan SDF.asset","isOverride":true}
+Resources:
+{}
+report@assets:stage2 13222.17
+report@assets:stage3 879.10
+[ Stage2 ] Assets postprocessed and bundled successfully
+report@config:unity 0.37
+report@config:load 36.79
+report@config:unity 6.48
+﻿
+[ error ] $﻿
+Diagnostics gathered successfully
+.NET Core 3 runtime not found.
+.NET Core 3 runtime not found.
+Microsoft (R) Visual C# Compiler version 4.3.1-3.22526.13 (41a5af9d)
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+
+error CS2001: Source file 'C:\Users\Dang Do\Documents\Unity Projects\Packages\Luna Playable Package\Do\Documents\Unity' could not be found.
+
+error CS2001: Source file 'C:\Users\Dang Do\Documents\Unity Projects\Packages\Luna Playable Package\Projects\PlayableDetective\LunaTemp\Assemblies\stage_1\Assembly-CSharp.dll' could not be found.
+
+[ error ] $1
+[ error ] $Assets bundling failed
+Error: CODE_BUNDLE
+    at _0x4be061.action (C:\Users\Dang Do\Documents\Unity Projects\Packages\Luna Playable Package\pipeline\Jakefile.js:6:2940956)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

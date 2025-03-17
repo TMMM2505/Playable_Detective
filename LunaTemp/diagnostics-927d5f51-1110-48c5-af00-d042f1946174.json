@@ -1,0 +1,198 @@
+{
+  "BuildID": "927d5f51-1110-48c5-af00-d042f1946174",
+  "Command": "project:build",
+  "ProjectID": "a1c17f56d03c7f14b951814cb9530e84",
+  "ProjectStateHash": "8f87c6b078dc9bd4a5563138cc29bb4563ccdc853a56596e60aa367591e20872",
+  "StageCompletedAt": 3,
+  "EarliestFatalError": 0,
+  "StartTime": 1742208887854,
+  "EndTime": 1742208940540,
+  "PlaygroundUserID": 18180,
+  "OperatingSystem": "win32",
+  "UnityPackageID": null,
+  "TargetPlatform": "develop",
+  "UnityVersion": "2022.3.27f1",
+  "LunaVersion": "6.2.1",
+  "LogCount": 8,
+  "Logs": [
+    {
+      "LogID": "3685d0ef-9ec6-4c5d-b39e-7b40777606b5",
+      "Order": 6,
+      "Timestamp": 1742208941845,
+      "Stage": 3,
+      "ErrorType": 0,
+      "ErrorCode": "LP3010",
+      "Description": "You are using an unsupported base type: Editor.",
+      "Details": [
+        "You are using an unsupported base type: Editor which is not supported in ad networks."
+      ],
+      "DescriptionValues": [
+        "Editor"
+      ],
+      "DetailsValues": [
+        "Editor"
+      ],
+      "LogCount": 1,
+      "LinePosition": 144,
+      "FilePath": "C:\\Users\\Dang Do\\Documents\\Unity Projects\\PlayableDetective\\Assets\\Game\\Scripts\\Element\\Water\\InteractableWater.cs",
+      "ClassName": "",
+      "MemberName": "",
+      "Severity": 0
+    },
+    {
+      "LogID": "15acda6e-d2c5-4085-9675-dff2630c4a1a",
+      "Order": 6,
+      "Timestamp": 1742208942595,
+      "Stage": 3,
+      "ErrorType": 3,
+      "ErrorCode": "LP3007",
+      "Description": "You are not using any custom events",
+      "Details": [
+        "You are not using any custom events. It is recommended to use custom events to have a better understanding of the playable."
+      ],
+      "DescriptionValues": [
+        ""
+      ],
+      "DetailsValues": [
+        ""
+      ],
+      "LogCount": 1,
+      "LinePosition": null,
+      "FilePath": "",
+      "ClassName": "",
+      "MemberName": "",
+      "Severity": 0
+    },
+    {
+      "LogID": "4502a61f-c5bc-4883-b79b-b47815dbaa8e",
+      "Order": 6,
+      "Timestamp": 1742208942599,
+      "Stage": 3,
+      "ErrorType": 3,
+      "ErrorCode": "LP3011",
+      "Description": "You are not using any LunaPlaygroundFields attributes.",
+      "Details": [
+        "You are not using any LunaPlaygroundFields attributes, it allows you to configure your playable to different concepts to find the best variation, which can drastically improve playable performance on all ad networks."
+      ],
+      "DescriptionValues": null,
+      "DetailsValues": null,
+      "LogCount": 1,
+      "LinePosition": null,
+      "FilePath": "",
+      "ClassName": "",
+      "MemberName": "",
+      "Severity": 0
+    },
+    {
+      "LogID": "b9b3e1a3-25f8-4a18-a4ed-f074061748f6",
+      "Order": 0,
+      "Timestamp": 1742208893461,
+      "Stage": 1,
+      "ErrorType": 0,
+      "ErrorCode": "LP1030",
+      "Description": "TMP Font Asset uses unsupported 'Atlas Population Mode'",
+      "Details": [
+        "TMP Font Asset '{0}' uses Atlas Population Mode '{1}' which is not supported"
+      ],
+      "DescriptionValues": [],
+      "DetailsValues": [
+        "LiberationSans SDF - Fallback",
+        "Dynamic"
+      ],
+      "LogCount": 1,
+      "LinePosition": 0,
+      "FilePath": "",
+      "ClassName": "",
+      "MemberName": "",
+      "Severity": 0
+    },
+    {
+      "LogID": "d9c34fc6-6d4f-44b3-a104-393456586e07",
+      "Order": 1,
+      "Timestamp": 1742208909567,
+      "Stage": 1,
+      "ErrorType": 2,
+      "ErrorCode": "LP1014",
+      "Description": "We recommend running Runtime Analysis to find and remove all unused code",
+      "Details": [
+        "Navigate to the Runtime Analysis → Code tab to enable code stripping. Before uploading the playable, please make sure to have played all scenario’s of the playable in a development build to make Runtime Analysis work properly."
+      ],
+      "DescriptionValues": [],
+      "DetailsValues": [],
+      "LogCount": 1,
+      "LinePosition": 0,
+      "FilePath": "",
+      "ClassName": "",
+      "MemberName": "",
+      "Severity": 0
+    },
+    {
+      "LogID": "2bf5bdde-b055-409a-bc16-ec0e8b994e5f",
+      "Order": 2,
+      "Timestamp": 1742208909608,
+      "Stage": 1,
+      "ErrorType": 0,
+      "ErrorCode": "LP1027",
+      "Description": "This DOTween version is not supported",
+      "Details": [
+        "The incorrect DOTween version for this Unity version is in use, please update or downgrade to the recommended version {0} in the package manager. Go to Window → Package Manager."
+      ],
+      "DescriptionValues": [],
+      "DetailsValues": [
+        ""
+      ],
+      "LogCount": 1,
+      "LinePosition": 0,
+      "FilePath": "",
+      "ClassName": "",
+      "MemberName": "",
+      "Severity": 0
+    },
+    {
+      "LogID": "19119be4-9833-4b20-b33a-2279954ecdd8",
+      "Order": 3,
+      "Timestamp": 1742208909608,
+      "Stage": 1,
+      "ErrorType": 0,
+      "ErrorCode": "LP1015",
+      "Description": "This TMP version is not fully supported",
+      "Details": [
+        "The incorrect Text Mesh Pro for this Unity version is in use, please update or downgrade to the recommended version {0} in the package manager. Go to Window → Package Manager"
+      ],
+      "DescriptionValues": [],
+      "DetailsValues": [
+        ""
+      ],
+      "LogCount": 1,
+      "LinePosition": 0,
+      "FilePath": "",
+      "ClassName": "",
+      "MemberName": "",
+      "Severity": 0
+    },
+    {
+      "LogID": "6ac899c2-eaee-487a-82f6-7d8e432b7f55",
+      "Order": 4,
+      "Timestamp": 1742208909608,
+      "Stage": 1,
+      "ErrorType": 0,
+      "ErrorCode": "LP1032",
+      "Description": "Package(s) is not supported in Luna",
+      "Details": [
+        "Currently package(s) com.unity.timeline are not supported in Luna. We recommend you to remove it and workaround it's functionality."
+      ],
+      "DescriptionValues": [
+        "com.unity.timeline (1.7.6)"
+      ],
+      "DetailsValues": [
+        "com.unity.timeline"
+      ],
+      "LogCount": 1,
+      "LinePosition": 0,
+      "FilePath": "C:/Users/Dang Do/Documents/Unity Projects/PlayableDetective/Packages\\manifest.json",
+      "ClassName": "",
+      "MemberName": "",
+      "Severity": 0
+    }
+  ]
+}
