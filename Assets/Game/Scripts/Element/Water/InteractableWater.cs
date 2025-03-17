@@ -17,7 +17,8 @@ public class InteractableWater : MonoBehaviour
     [Header("Gizmo")]
     [SerializeField] internal Color GizmoColor = Color.white;
 
-    [Header("Linked Water Flow")]
+    [Header("Water Properties")]
+    [SerializeField] internal float waterDensity = 4.5f;
     [SerializeField] InteractableWater connectedWaterFlow;
     [SerializeField] float pumpRatio = 1.4f;
 

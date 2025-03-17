@@ -28,6 +28,6 @@ public class Puppy : CharacterSpine
     public void PuppyCallingForHelp()
     {
         SoundManager.Instance.PlaySoundFXClip(callingForHelpSfx, 1, false);
-        SetAnim(Constant.puppyJumpingForHelp, false, () => SetAnim(Constant.puppyIdle, true));
+        SetAnim(Constant.puppyJumpingForHelp, false, () => SetAnim(Constant.puppyIdleSad, true));
     }
 }
