@@ -14,12 +14,7 @@ public class CountdownController : MonoBehaviour
     {
         transform.localScale = Vector3.zero;
 
-        GameManager.Instance.onWin += CountdownTrigger;
-    }
-
-    private void CountdownTrigger()
-    {
-        //StartCoroutine(CountdownToStore(GameManager.Instance.timeWaitEndGame + 1f));
+        GameManager.Instance.onWin += () => StartCoroutine(CountdownToStore(2));
     }
     private IEnumerator CountdownToStore(float timeWait)
     {
@@ -36,7 +31,7 @@ public class CountdownController : MonoBehaviour
         }
         countdownDisplay.text = countdownTime.ToString(); //set text to 0
 
-        GameManager.Instance.TriggerCTA();
+        //GameManager.Instance.TriggerCTA();
     }
     private IEnumerator RingFill(float duration)
     {

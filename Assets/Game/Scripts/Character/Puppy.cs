@@ -5,14 +5,16 @@ public class Puppy : CharacterSpine
 {
     [Header("Puppy Audio")]
     [SerializeField] AudioClip callingForHelpSfx;
-    [SerializeField] AudioClip dieSfx;
+    [SerializeField] AudioClip winSfx;
 
     // Start is called before the first frame update
     void Start()
     {
         linkedOutline.onGlowComplete += PuppyCallingForHelp;
 
-        StartCoroutine(RandomRoarIntervalLoop());   
+        StartCoroutine(RandomRoarIntervalLoop());
+
+        GameManager.Instance.onWin += PuppyEndGame;
     }
 
     private IEnumerator RandomRoarIntervalLoop()
@@ -29,5 +31,11 @@ public class Puppy : CharacterSpine
     {
         SoundManager.Instance.PlaySoundFXClip(callingForHelpSfx, 1, false);
         SetAnim(Constant.puppyJumpingForHelp, false, () => SetAnim(Constant.puppyIdleSad, true));
+    }
+    private void PuppyEndGame()
+    {
+        StopCoroutine(RandomRoarIntervalLoop());
+        SetAnim(Constant.puppyWin, true);
+        SoundManager.Instance.PlaySoundFXClip(winSfx, 1, false);
     }
 }

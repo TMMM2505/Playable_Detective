@@ -636,7 +636,7 @@ MonoBehaviour:
   Height: 2.660559
   WaterMaterial: {fileID: 2100000, guid: 11943f383a2d587488611d73bda833eb, type: 2}
   GizmoColor: {r: 1, g: 1, b: 1, a: 1}
-  waterDensity: 4.5
+  waterDensity: 10
   connectedWaterFlow: {fileID: 2020538758}
   pumpRatio: 1.4
 --- !u!114 &318044555
@@ -651,6 +651,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24869f0437c69247a9a7fbffa09d541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterSplashSfx:
+  - {fileID: 8300000, guid: 726b7c73adbe5e940a625f24fee192db, type: 3}
+  - {fileID: 8300000, guid: 745865a8183805940bcb692fb358edd1, type: 3}
 --- !u!68 &318044556
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -2045,7 +2048,7 @@ GameObject:
   - component: {fileID: 701977476}
   - component: {fileID: 701977474}
   - component: {fileID: 701977475}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2154,9 +2157,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 788116624}
   linkedOutline: {fileID: 610254859}
-  mainScared: {fileID: 0}
+  mainLose: {fileID: 8300000, guid: a7139ffe7e2e96d4eb5e9b0388e31b27, type: 3}
   helpMe: {fileID: 8300000, guid: fd42269f3e558e143ae940e9ca7ae239, type: 3}
-  mainWin: {fileID: 0}
+  mainWin: {fileID: 8300000, guid: e4e71abead1ae0f48a8b968d0b22f1f2, type: 3}
 --- !u!1 &731789737
 GameObject:
   m_ObjectHideFlags: 0
@@ -2487,7 +2490,7 @@ GameObject:
   - component: {fileID: 788116626}
   - component: {fileID: 788116625}
   - component: {fileID: 788116624}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2971,7 +2974,7 @@ MonoBehaviour:
   Height: 0.3700371
   WaterMaterial: {fileID: 2100000, guid: 11943f383a2d587488611d73bda833eb, type: 2}
   GizmoColor: {r: 1, g: 1, b: 1, a: 1}
-  waterDensity: 4.5
+  waterDensity: 10
   connectedWaterFlow: {fileID: 0}
   pumpRatio: 1.5
 --- !u!114 &935056065
@@ -2986,6 +2989,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24869f0437c69247a9a7fbffa09d541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterSplashSfx:
+  - {fileID: 8300000, guid: 726b7c73adbe5e940a625f24fee192db, type: 3}
+  - {fileID: 8300000, guid: 745865a8183805940bcb692fb358edd1, type: 3}
 --- !u!68 &935056066
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -3089,7 +3095,7 @@ GameObject:
   - component: {fileID: 951629639}
   - component: {fileID: 951629638}
   - component: {fileID: 951629637}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3723,7 +3729,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1604735139097785847, guid: 59ecb7d62e795e848bdd1dd372805841, type: 3}
       propertyPath: m_Mass
-      value: 1.5
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 1604735139097785847, guid: 59ecb7d62e795e848bdd1dd372805841, type: 3}
       propertyPath: m_BodyType
@@ -4369,7 +4375,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1604735139097785847, guid: 59ecb7d62e795e848bdd1dd372805841, type: 3}
       propertyPath: m_Mass
-      value: 1.5
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 1604735139097785847, guid: 59ecb7d62e795e848bdd1dd372805841, type: 3}
       propertyPath: m_BodyType
@@ -4492,7 +4498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1372485784
 Transform:
   m_ObjectHideFlags: 0
@@ -4525,7 +4531,6 @@ MonoBehaviour:
   tutorialText: {fileID: 1615551586}
   FadeBG: {fileID: 1068877778}
   endGamePopUp: {fileID: 1917016086}
-  rewardBox: {fileID: 0}
 --- !u!1 &1378085412
 GameObject:
   m_ObjectHideFlags: 0
@@ -4716,7 +4721,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1604735139097785847, guid: 59ecb7d62e795e848bdd1dd372805841, type: 3}
       propertyPath: m_Mass
-      value: 1.5
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 1604735139097785847, guid: 59ecb7d62e795e848bdd1dd372805841, type: 3}
       propertyPath: m_BodyType
@@ -5068,6 +5073,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wooden Platform (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1113443860036301060, guid: 46c41f946d07bf3479f1457de092a525, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3597164806474779074, guid: 46c41f946d07bf3479f1457de092a525, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5917585594482162369, guid: 46c41f946d07bf3479f1457de092a525, type: 3}
       propertyPath: bounceLimit
       value: 0.02
@@ -5270,7 +5283,7 @@ GameObject:
   - component: {fileID: 1820667968}
   - component: {fileID: 1820667967}
   - component: {fileID: 1820667966}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Puppy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5325,7 +5338,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.10178089, y: 0.5122519}
+  m_Offset: {x: 0.10178089, y: 0.56846374}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5336,7 +5349,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2035618, y: 1.1342348}
+  m_Size: {x: 1.2035618, y: 1.0624236}
   m_EdgeRadius: 0
 --- !u!50 &1820667967
 Rigidbody2D:
@@ -5380,7 +5393,7 @@ MonoBehaviour:
   anim: {fileID: 951629637}
   linkedOutline: {fileID: 1304790894}
   callingForHelpSfx: {fileID: 8300000, guid: e055aaa4fa3d84d4d8a34e8fd95ee303, type: 3}
-  dieSfx: {fileID: 0}
+  winSfx: {fileID: 8300000, guid: 7aba80ded46f24248b3b9f264bb3aeca, type: 3}
 --- !u!1 &1917016081
 GameObject:
   m_ObjectHideFlags: 0
@@ -6198,7 +6211,7 @@ MonoBehaviour:
   Height: 1.209627
   WaterMaterial: {fileID: 2100000, guid: 11943f383a2d587488611d73bda833eb, type: 2}
   GizmoColor: {r: 1, g: 1, b: 1, a: 1}
-  waterDensity: 4.5
+  waterDensity: 10
   connectedWaterFlow: {fileID: 0}
   pumpRatio: 1.5
 --- !u!114 &2020538759
@@ -6213,6 +6226,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24869f0437c69247a9a7fbffa09d541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterSplashSfx:
+  - {fileID: 8300000, guid: 726b7c73adbe5e940a625f24fee192db, type: 3}
+  - {fileID: 8300000, guid: 745865a8183805940bcb692fb358edd1, type: 3}
 --- !u!68 &2020538760
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -6483,7 +6499,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1604735139097785847, guid: 59ecb7d62e795e848bdd1dd372805841, type: 3}
       propertyPath: m_Mass
-      value: 1.5
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 1604735139097785847, guid: 59ecb7d62e795e848bdd1dd372805841, type: 3}
       propertyPath: m_BodyType
@@ -6733,7 +6749,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1604735139097785847, guid: 59ecb7d62e795e848bdd1dd372805841, type: 3}
       propertyPath: m_Mass
-      value: 1.5
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 1604735139097785847, guid: 59ecb7d62e795e848bdd1dd372805841, type: 3}
       propertyPath: m_BodyType
@@ -6849,6 +6865,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wooden Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 1113443860036301060, guid: 46c41f946d07bf3479f1457de092a525, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3597164806474779074, guid: 46c41f946d07bf3479f1457de092a525, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7182345673225536178, guid: 46c41f946d07bf3479f1457de092a525, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.99
@@ -6902,6 +6926,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 410733629}
     m_Modifications:
+    - target: {fileID: 1604735139097785847, guid: 59ecb7d62e795e848bdd1dd372805841, type: 3}
+      propertyPath: m_Mass
+      value: 3.75
+      objectReference: {fileID: 0}
     - target: {fileID: 5395618788320540732, guid: 59ecb7d62e795e848bdd1dd372805841, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.25

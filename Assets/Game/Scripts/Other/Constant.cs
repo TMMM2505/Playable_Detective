@@ -13,7 +13,7 @@ public class Constant
 
     public const string mainPanic = "Kien22/1";
     public const string mainCallForHelp = "Kien22/2";
-    public const string mainWin = "Kien22/4";
+    public const string mainEndgame = "Kien22/4";
 
     public const string puppyIdleSad = "Kien/5";
     public const string puppyJumpingForHelp = "Kien/4";

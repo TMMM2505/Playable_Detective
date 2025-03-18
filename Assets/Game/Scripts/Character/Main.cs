@@ -4,7 +4,7 @@ using UnityEngine;
 public class Main : CharacterSpine
 {
     [Header("Main Audio")]
-    [SerializeField] AudioClip mainScared;
+    [SerializeField] AudioClip mainLose;
     [SerializeField] AudioClip helpMe;
     [SerializeField] AudioClip mainWin;
 
@@ -13,7 +13,9 @@ public class Main : CharacterSpine
         StartCoroutine(RandomHelpIntervalLoop());
 
         linkedOutline.onGlowComplete += MainCallingForHelp;
-        GameManager.Instance.onWin += MainWin;
+
+        GameManager.Instance.onWin += () => MainEndgame(false);
+        GameManager.Instance.onWin += () => MainEndgame(true);
     }
 
     private IEnumerator RandomHelpIntervalLoop()
@@ -24,7 +26,6 @@ public class Main : CharacterSpine
 
             MainCallingForHelp();
         }
-        StopCoroutine(RandomHelpIntervalLoop());
     }
     public void MainCallingForHelp()
     {
@@ -32,12 +33,29 @@ public class Main : CharacterSpine
         SetAnim(Constant.mainCallForHelp, false, () => SetAnim(Constant.mainPanic, true));
     }
 
-    private void MainWin()
+    private void MainEndgame(bool win)
     {
-        //SetAnim(Constant.supermainWin, true);
+        StopCoroutine(RandomHelpIntervalLoop());
+
+        SetAnim(Constant.mainEndgame, true);
+
+        if (win)
+        {
+            SoundManager.Instance.PlaySoundFXClip(mainWin, 1, false);
+        }
+        else
+        {
+            SoundManager.Instance.PlaySoundFXClip(mainLose, 1, false);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (state == ECharacterState.Attack || state == ECharacterState.Invincible | state == ECharacterState.Dead) return;
+        if (GameManager.Instance.gameOver) return;
+
+        if (collision.gameObject.layer == Constant.playerLayer)
+        {
+            GameManager.Instance.gameOver = true;
+            GameManager.Instance.onWin?.Invoke();
+        }
     }
 }

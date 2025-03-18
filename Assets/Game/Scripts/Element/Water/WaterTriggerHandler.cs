@@ -1,18 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterTriggerHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] List<AudioClip> waterSplashSfx;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if(collision.gameObject.layer == Constant.boulderLayer)
+        {
+            int randomIndex = Random.Range(0, waterSplashSfx.Count);
+
+            SoundManager.Instance.PlaySoundFXClip(waterSplashSfx[randomIndex], 1, false);
+        }
     }
 }
