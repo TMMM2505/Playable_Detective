@@ -31,7 +31,7 @@ public class CountdownController : MonoBehaviour
         }
         countdownDisplay.text = countdownTime.ToString(); //set text to 0
 
-        //GameManager.Instance.TriggerCTA();
+        GameManager.Instance.nextLevel?.Invoke();
     }
     private IEnumerator RingFill(float duration)
     {

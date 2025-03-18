@@ -132,7 +132,8 @@ public class InteractableWater : MonoBehaviour
         GenerateMesh();
         ResetEdgeCollider();
 
-        transform.position += new Vector3(calculatedWidth / 2, calculatedHeight / 2, 0);
+        float positionOffset = DeviceOrientationDetection.isLandscape ? 2 * (1 / LevelManager.Instance.transform.localScale.x) : 2.0f;
+        transform.position += new Vector3(calculatedWidth / positionOffset, calculatedHeight / positionOffset, 0);
 
         if(connectedWaterFlow != null)
         {

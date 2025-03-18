@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
-using System.Collections;
+using DG.Tweening;
+using System;
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private TMP_Text tutorialText;
@@ -11,6 +12,7 @@ public class UIManager : Singleton<UIManager>
     {
         GameManager.Instance.onLose += ShowLose;
         GameManager.Instance.onWin += ShowWin;
+        GameManager.Instance.nextLevel += NextLevelTransition;
     }
     private void Start()
     {
@@ -20,7 +22,7 @@ public class UIManager : Singleton<UIManager>
     {
         tutorialText.gameObject.SetActive(false);
         FadeBG.SetActive(true);
-        endGamePopUp.buttonText.text = "Replay";
+        //endGamePopUp.buttonText.text = "Replay";
 
         endGamePopUp.showText += endGamePopUp.ShowLoseText;
         StartCoroutine(endGamePopUp.Activate(2f));
@@ -30,9 +32,15 @@ public class UIManager : Singleton<UIManager>
     {
         tutorialText.gameObject.SetActive(false);
         FadeBG.SetActive(true);
-        endGamePopUp.buttonText.text = "Continue";
+        //endGamePopUp.buttonText.text = "Continue";
 
         endGamePopUp.showText += endGamePopUp.ShowVictoryText;
         StartCoroutine(endGamePopUp.Activate(2f));
+    }
+    private void NextLevelTransition()
+    {
+        FadeBG.SetActive(false);
+
+        endGamePopUp.transform.GetChild(0).DOScale(Vector3.zero, .25f).onComplete += () => tutorialText.gameObject.SetActive(true);
     }
 }

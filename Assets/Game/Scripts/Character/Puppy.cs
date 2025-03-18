@@ -25,7 +25,7 @@ public class Puppy : CharacterSpine
 
             PuppyCallingForHelp();
         }
-        StopCoroutine(RandomRoarIntervalLoop());
+        StopAllCoroutines();
     }
     public void PuppyCallingForHelp()
     {
@@ -34,7 +34,7 @@ public class Puppy : CharacterSpine
     }
     private void PuppyEndGame()
     {
-        StopCoroutine(RandomRoarIntervalLoop());
+        StopAllCoroutines();
         SetAnim(Constant.puppyWin, true);
         SoundManager.Instance.PlaySoundFXClip(winSfx, 1, false);
     }

@@ -8,9 +8,11 @@ public class Main : CharacterSpine
     [SerializeField] AudioClip helpMe;
     [SerializeField] AudioClip mainWin;
 
+    private Coroutine ongoingCoroutine;
+
     private void Start()
     {
-        StartCoroutine(RandomHelpIntervalLoop());
+        ongoingCoroutine = StartCoroutine(RandomHelpIntervalLoop());
 
         linkedOutline.onGlowComplete += MainCallingForHelp;
 
@@ -29,13 +31,15 @@ public class Main : CharacterSpine
     }
     public void MainCallingForHelp()
     {
+        if (GameManager.Instance.gameOver) return;
+
         SoundManager.Instance.PlaySoundFXClip(helpMe, 1, false);
         SetAnim(Constant.mainCallForHelp, false, () => SetAnim(Constant.mainPanic, true));
     }
 
     private void MainEndgame(bool win)
     {
-        StopCoroutine(RandomHelpIntervalLoop());
+        StopCoroutine(ongoingCoroutine);
 
         SetAnim(Constant.mainEndgame, true);
 

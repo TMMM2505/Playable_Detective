@@ -9,17 +9,19 @@ public class Hand : MonoBehaviour
     [SerializeField] List<Pin> linkedPins;
     [SerializeField] SpriteOutline linkedOutline;
     [SerializeField] float waitTime;
-    [SerializeField] GameObject inputManager;
+    [SerializeField] GameObject activateObject; //activate the chosen object when emerge in scene
     private void Awake()
     {
         linkedOutline.onGlowComplete += ActivateHand;
 
-        inputManager.SetActive(false);
+        if (activateObject != null) activateObject.SetActive(false);
         gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
+        if (linkedPins.Count == 0) return;
+
         foreach (var pin in linkedPins)
         {
             pin.onClick += DeactivateHand;
@@ -27,6 +29,8 @@ public class Hand : MonoBehaviour
     }
     private void OnDisable()
     {
+        if (linkedPins.Count == 0) return;
+
         foreach (var pin in linkedPins)
         {
             pin.onClick -= DeactivateHand;
@@ -40,7 +44,7 @@ public class Hand : MonoBehaviour
     {
         if (destinations.Count == 0) yield break;
 
-        inputManager.SetActive(true);
+        if(activateObject != null) activateObject.SetActive(true);
 
         while (true)
         {

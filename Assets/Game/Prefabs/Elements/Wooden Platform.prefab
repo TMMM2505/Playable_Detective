@@ -141,7 +141,6 @@ GameObject:
   - component: {fileID: 79510539178412754}
   - component: {fileID: 1113443860036301060}
   - component: {fileID: 6482083970492776714}
-  - component: {fileID: 712379744928025345}
   m_Layer: 0
   m_Name: Wooden Platform Outline (1)
   m_TagString: Untagged
@@ -204,7 +203,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 42be9f9a9027f3e49aee1747da13b8a3, type: 3}
   m_Color: {r: 1, g: 0.9254902, b: 0, a: 1}
   m_FlipX: 0
@@ -217,20 +216,6 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6482083970492776714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2180397012863616132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ba90af8b33f404da547c31852cb6a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowBatonPass: []
-  isFirstGlow: 1
---- !u!114 &712379744928025345
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -322,7 +307,6 @@ GameObject:
   - component: {fileID: 3396037674169000481}
   - component: {fileID: 3597164806474779074}
   - component: {fileID: 7426391914324657457}
-  - component: {fileID: 6447336823898258633}
   m_Layer: 0
   m_Name: Wooden Platform Outline
   m_TagString: Untagged
@@ -385,7 +369,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 42be9f9a9027f3e49aee1747da13b8a3, type: 3}
   m_Color: {r: 1, g: 0.9254902, b: 0, a: 1}
   m_FlipX: 0
@@ -398,20 +382,6 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7426391914324657457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7384619544013404354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ba90af8b33f404da547c31852cb6a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowBatonPass: []
-  isFirstGlow: 1
---- !u!114 &6447336823898258633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

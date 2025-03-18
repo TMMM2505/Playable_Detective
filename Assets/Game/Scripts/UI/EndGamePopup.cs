@@ -3,7 +3,6 @@ using Spine;
 using Spine.Unity;
 using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class EndGamePopup : MonoBehaviour
@@ -11,14 +10,12 @@ public class EndGamePopup : MonoBehaviour
     [SerializeField] RectTransform popupTransform;
     [SerializeField] SkeletonAnimation victoryText;
     [SerializeField] SkeletonAnimation loseText;
-    [SerializeField] GameObject ctaButton;
-    [SerializeField] internal TMP_Text buttonText;
+    //[SerializeField] internal TMP_Text buttonText;
 
     internal Action showText;
     // Start is called before the first frame update
     void Start()
     {
-        ctaButton.SetActive(false); 
         victoryText.gameObject.SetActive(false);    
         loseText.gameObject.SetActive(false); 
 
@@ -28,8 +25,6 @@ public class EndGamePopup : MonoBehaviour
     internal IEnumerator Activate(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-
-        ctaButton.SetActive(true);
 
         if (DeviceOrientationDetection.isLandscape)
         {

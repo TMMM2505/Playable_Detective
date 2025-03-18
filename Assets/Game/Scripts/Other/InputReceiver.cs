@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class InputReceiver : MonoBehaviour
 {
+    private void Start()
+    {
+        GameManager.Instance.nextLevel += TurnOffInput;
+    }
     void Update()
     {
         if (Input.GetMouseButton(0))
@@ -30,5 +34,9 @@ public class InputReceiver : MonoBehaviour
                 }
             }
         }
+    }
+    private void TurnOffInput()
+    {
+        gameObject.SetActive(false);    
     }
 }
